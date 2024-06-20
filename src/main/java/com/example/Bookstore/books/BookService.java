@@ -15,8 +15,26 @@ public class BookService {
         return bookList;
     }
 
-    void addBook(Book book) {
-        bookList.add(book);
+    void addBook(Book newBook) {
+        if (newBook.isbn() == null || newBook.isbn().isEmpty()) {
+            throw new IllegalArgumentException("ISBN is invalid");
+        }
+        if (newBook.author() == null || newBook.author().isEmpty()) {
+            throw new IllegalArgumentException("Author is invalid");
+        }
+        if (newBook.title() == null || newBook.title().isEmpty()) {
+            throw new IllegalArgumentException("Title is invalid");
+        }
+
+        long contains = bookList.stream()
+                .filter(book -> book.isbn().equals(newBook.isbn()))
+                .count();
+
+        if(contains > 0) {
+            throw new IllegalArgumentException("ISBN Number already exists");
+        }
+
+        bookList.add(newBook);
     }
 
     void updateBook(String isbn, Book updateBook) {
@@ -39,7 +57,7 @@ public class BookService {
                 .filter(book -> book.isbn().equals(isbn))
                 .findFirst();
 
-        if(b.isEmpty()) {
+        if (b.isEmpty()) {
             throw new IllegalArgumentException("No book with the given ISBN found");
         }
 
