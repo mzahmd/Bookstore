@@ -1,8 +1,6 @@
 package com.example.Bookstore.books;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,8 +14,23 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("")
+    @GetMapping
     List<Book> getBooks() {
         return bookService.getAllBooks();
+    }
+
+    @PostMapping
+    public void addBook(@RequestBody Book book) {
+        bookService.addBook(book);
+    }
+
+    @PutMapping("{isbn}")
+    public void updateBook(@PathVariable String isbn,  @RequestBody Book book) {
+        bookService.updateBook(isbn, book);
+    }
+
+    @DeleteMapping("{isbn}")
+    public void deleteBook(@PathVariable String isbn) {
+        bookService.deleteBook(isbn);
     }
 }
