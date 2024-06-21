@@ -1,5 +1,6 @@
 package com.example.Bookstore.books;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class BookService {
 
     List<Book> bookList = new ArrayList<>();
 
-    List<Book> getAllBooks() {
+    List<Book> getBooks() {
         return bookList;
     }
 
@@ -26,11 +27,11 @@ public class BookService {
             throw new IllegalArgumentException("Title is invalid");
         }
 
-        long contains = bookList.stream()
+        Optional<Book> b = bookList.stream()
                 .filter(book -> book.isbn().equals(newBook.isbn()))
-                .count();
+                .findFirst();
 
-        if(contains > 0) {
+        if (b.isPresent()) {
             throw new IllegalArgumentException("ISBN Number already exists");
         }
 
@@ -47,7 +48,6 @@ public class BookService {
         }
 
         int index = bookList.indexOf(b.get());
-        System.out.println(index);
 
         bookList.set(index, updateBook);
     }
