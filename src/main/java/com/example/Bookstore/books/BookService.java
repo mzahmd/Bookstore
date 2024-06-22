@@ -17,16 +17,6 @@ public class BookService {
     }
 
     void addBook(Book newBook) {
-        if (newBook.isbn() == null || newBook.isbn().isEmpty()) {
-            throw new IllegalArgumentException("ISBN is invalid");
-        }
-        if (newBook.author() == null || newBook.author().isEmpty()) {
-            throw new IllegalArgumentException("Author is invalid");
-        }
-        if (newBook.title() == null || newBook.title().isEmpty()) {
-            throw new IllegalArgumentException("Title is invalid");
-        }
-
         Optional<Book> b = bookList.stream()
                 .filter(book -> book.isbn().equals(newBook.isbn()))
                 .findFirst();

@@ -1,3 +1,12 @@
 package com.example.Bookstore.books;
 
-public record Book(String title, String author, String isbn) {}
+import jakarta.validation.constraints.NotBlank;
+
+public record Book(
+        @NotBlank
+        String title,
+        @NotBlank
+        String author,
+        @NotBlank
+        String isbn
+) {}

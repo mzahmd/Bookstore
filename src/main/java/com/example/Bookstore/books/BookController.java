@@ -1,5 +1,6 @@
 package com.example.Bookstore.books;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,12 +28,12 @@ public class BookController {
     }
 
     @PostMapping
-    public void addBook(@RequestBody Book book) {
+    public void addBook(@Valid @RequestBody Book book) {
         bookService.addBook(book);
     }
 
     @PutMapping("{isbn}")
-    public void updateBook(@PathVariable String isbn,  @RequestBody Book book) {
+    public void updateBook(@PathVariable String isbn,  @Valid @RequestBody Book book) {
         bookService.updateBook(isbn, book);
     }
 
