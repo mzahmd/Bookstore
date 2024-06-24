@@ -2,12 +2,10 @@ package com.example.Bookstore.books;
 
 import com.example.Bookstore.exception.DuplicateResourceException;
 import com.example.Bookstore.exception.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookService {
@@ -19,11 +17,10 @@ public class BookService {
     }
 
     void addBook(Book newBook) {
-        Optional<Book> b = bookList.stream()
-                .filter(book -> book.isbn().equals(newBook.isbn()))
-                .findFirst();
+        boolean bookExists = bookList.stream()
+                .anyMatch(book -> book.isbn().equals(newBook.isbn()));
 
-        if (b.isPresent()) {
+        if (bookExists) {
             throw new DuplicateResourceException("ISBN already exists");
         }
 
@@ -31,29 +28,23 @@ public class BookService {
     }
 
     void updateBook(String isbn, Book updateBook) {
-        Optional<Book> b = bookList.stream()
+        Book oldBook = bookList.stream()
                 .filter(book -> book.isbn().equals(isbn))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new ResourceNotFoundException("No book with the given ISBN found"));
 
-        if (b.isEmpty()) {
-            throw new ResourceNotFoundException("No book with the given ISBN found");
-        }
-
-        int index = bookList.indexOf(b.get());
+        int index = bookList.indexOf(oldBook);
 
         bookList.set(index, updateBook);
     }
 
     public void deleteBook(String isbn) {
-        Optional<Book> b = bookList.stream()
+        Book oldBook = bookList.stream()
                 .filter(book -> book.isbn().equals(isbn))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new ResourceNotFoundException("No book with the given ISBN found"));
 
-        if (b.isEmpty()) {
-            throw new ResourceNotFoundException("No book with the given ISBN found");
-        }
-
-        bookList.remove(b.get());
+        bookList.remove(oldBook);
 
     }
 }
