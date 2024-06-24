@@ -1,5 +1,7 @@
 package com.example.Bookstore.books;
 
+import com.example.Bookstore.exception.DuplicateResourceException;
+import com.example.Bookstore.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class BookService {
                 .findFirst();
 
         if (b.isPresent()) {
-            throw new IllegalArgumentException("ISBN Number already exists");
+            throw new DuplicateResourceException("ISBN already exists");
         }
 
         bookList.add(newBook);
@@ -34,7 +36,7 @@ public class BookService {
                 .findFirst();
 
         if (b.isEmpty()) {
-            throw new IllegalArgumentException("No book with the given ISBN found");
+            throw new ResourceNotFoundException("No book with the given ISBN found");
         }
 
         int index = bookList.indexOf(b.get());
@@ -48,7 +50,7 @@ public class BookService {
                 .findFirst();
 
         if (b.isEmpty()) {
-            throw new IllegalArgumentException("No book with the given ISBN found");
+            throw new ResourceNotFoundException("No book with the given ISBN found");
         }
 
         bookList.remove(b.get());
