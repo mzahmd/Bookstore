@@ -28,10 +28,17 @@ public class BookService {
     }
 
     void updateBook(String isbn, Book updateBook) {
+        boolean bookExists = bookList.stream()
+                .anyMatch(book -> book.isbn().equals(updateBook.isbn()));
+
+        if(bookExists) {
+            throw new DuplicateResourceException("ISBN already exists");
+        }
+
         Book oldBook = bookList.stream()
                 .filter(book -> book.isbn().equals(isbn))
                 .findFirst()
-                .orElseThrow(() -> new ResourceNotFoundException("No book with the given ISBN found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Given ISBN is not Valid"));
 
         int index = bookList.indexOf(oldBook);
 
