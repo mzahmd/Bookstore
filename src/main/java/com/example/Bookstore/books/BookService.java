@@ -11,47 +11,47 @@ import java.util.List;
 public class BookService {
 
     List<Book> bookList = new ArrayList<>();
+    BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     List<Book> getBooks() {
-        return bookList;
+        return bookRepository.findAll();
     }
 
     void addBook(Book newBook) {
-        boolean bookExists = bookList.stream()
-                .anyMatch(book -> book.isbn().equals(newBook.isbn()));
+        boolean bookExists = bookRepository.findByIsbn(newBook.getIsbn()).isPresent();
 
         if (bookExists) {
             throw new DuplicateResourceException("ISBN already exists");
         }
 
-        bookList.add(newBook);
+        bookRepository.save(newBook);
     }
 
     void updateBook(String isbn, Book updateBook) {
-        boolean bookExists = bookList.stream()
-                .anyMatch(book -> book.isbn().equals(updateBook.isbn()));
+        boolean bookExists = bookRepository.findByIsbn(updateBook.getIsbn()).isPresent();
 
-        if(bookExists) {
+        if (bookExists) {
             throw new DuplicateResourceException("ISBN already exists");
         }
 
-        Book oldBook = bookList.stream()
-                .filter(book -> book.isbn().equals(isbn))
-                .findFirst()
+        Book oldBook = bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> new ResourceNotFoundException("Given ISBN is not Valid"));
 
-        int index = bookList.indexOf(oldBook);
+        oldBook.setIsbn(updateBook.getIsbn());
+        oldBook.setTitle(updateBook.getTitle());
+        oldBook.setAuthor(updateBook.getAuthor());
 
-        bookList.set(index, updateBook);
+        bookRepository.save(oldBook);
     }
 
     public void deleteBook(String isbn) {
-        Book oldBook = bookList.stream()
-                .filter(book -> book.isbn().equals(isbn))
-                .findFirst()
+        Book oldBook = bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> new ResourceNotFoundException("No book with the given ISBN found"));
 
-        bookList.remove(oldBook);
-
+        bookRepository.deleteById(oldBook.getId());
     }
 }

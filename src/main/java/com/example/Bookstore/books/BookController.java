@@ -32,12 +32,12 @@ public class BookController {
         bookService.addBook(book);
     }
 
-    @PutMapping("/{isbn}")
+    @PutMapping("{isbn}")
     public void updateBook(@PathVariable String isbn,  @Valid @RequestBody Book book) {
         bookService.updateBook(isbn, book);
     }
 
-    @DeleteMapping("/{isbn}")
+    @DeleteMapping("{isbn}")
     public void deleteBook(@PathVariable String isbn) {
         bookService.deleteBook(isbn);
     }
