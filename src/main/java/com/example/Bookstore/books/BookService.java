@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public class BookService {
 
-    List<Book> bookList = new ArrayList<>();
     BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
