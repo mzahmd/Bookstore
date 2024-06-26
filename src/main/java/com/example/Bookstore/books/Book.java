@@ -1,45 +1,42 @@
 package com.example.Bookstore.books;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
+import jakarta.persistence.Table;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.GenerationType;
 
 @Entity
+@Table(name = "Book")
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @JsonIgnore
+    @SequenceGenerator(name = "bookSeqGen", sequenceName = "bookSeqGen", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bookSeqGen")
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "isbn", unique = true, nullable = false)
     private String isbn;
 
-    @Column(nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(name = "author", nullable = false)
     private String author;
 
-    public Book(Long id, String isbn, String title, String author) {
-        this.id = id;
+    public Book() {
+    }
+
+    public Book(String isbn, String title, String author) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
     }
 
-    public Book() {
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -68,10 +65,11 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", isbn='" + isbn + '\'' +
-                '}';
+        return "Book{"
+                + "id=" + id
+                + ", isbn='" + isbn + '\''
+                + ", title='" + title + '\''
+                + ", author='" + author + '\''
+                + '}';
     }
 }
