@@ -13,8 +13,8 @@ import jakarta.persistence.GenerationType;
 public class Book {
 
     @Id
-    @SequenceGenerator(name = "bookSeqGen", sequenceName = "bookSeqGen", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bookSeqGen")
+    @SequenceGenerator(name = "book_seq_gen", sequenceName = "book_seq_gen", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq_gen")
     private Long id;
 
     @Column(name = "isbn", unique = true, nullable = false)
@@ -30,6 +30,13 @@ public class Book {
     }
 
     public Book(String isbn, String title, String author) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+    }
+
+    public Book(Long id, String isbn, String title, String author) {
+        this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.author = author;
