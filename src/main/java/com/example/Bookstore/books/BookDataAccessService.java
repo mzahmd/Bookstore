@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class BookDataAccessService implements BookDao{
+public class BookDataAccessService implements BookDao {
     BookRepository bookRepository;
 
     public BookDataAccessService(BookRepository bookRepository) {
