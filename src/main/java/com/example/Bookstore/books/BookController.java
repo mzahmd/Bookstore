@@ -28,12 +28,12 @@ public class BookController {
     }
 
     @PostMapping
-    public void addBook(@Valid @RequestBody Book book) {
+    public void addBook(@RequestBody Book book) {
         bookService.addBook(book);
     }
 
     @PutMapping("{isbn}")
-    public void updateBook(@PathVariable String isbn,  @Valid @RequestBody Book book) {
+    public void updateBook(@PathVariable String isbn, @RequestBody Book book) {
         bookService.updateBook(isbn, book);
     }
 
