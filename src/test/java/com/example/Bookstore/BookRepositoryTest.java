@@ -12,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-// TODO was soll das heißen
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class BookRepositoryTest {
 
@@ -36,11 +35,21 @@ public class BookRepositoryTest {
         // When
         var actual = undertest.findByIsbn(isbn).orElseThrow();
 
-
         // Then
         assertThat(actual).isEqualTo(book);
+    }
 
+    @Test
+    void existsBookByIsbnFailsWhenIsbnIsNotPresent() {
+        // Given
+        Faker faker = new Faker();
+        String isbn = faker.regexify("[a-z1-9]{10}");
 
+        // When
+        boolean actual = undertest.existsByIsbn(isbn);
+
+        // Then
+        assertThat(actual).isFalse();
     }
 
 }
