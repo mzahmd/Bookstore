@@ -46,7 +46,35 @@ public class BookRepositoryTest {
         String isbn = faker.regexify("[a-z1-9]{10}");
 
         // When
-        boolean actual = undertest.existsByIsbn(isbn);
+        boolean actual = undertest.findByIsbn(isbn).isPresent();
+
+        // Then
+        assertThat(actual).isFalse();
+    }
+
+    @Test
+    void existsBookById() {
+        // Given
+        Faker faker = new Faker();
+        String isbn = faker.regexify("[a-z1-9]{10}");
+        Book book = new Book(isbn, faker.book().title(), faker.book().author());
+
+        undertest.save(book);
+
+        // When
+        var actual = undertest.existsById(book.getId());
+
+        // Then
+        assertThat(actual).isTrue();
+    }
+
+    @Test
+    void existsBookByIdFailsWhenIdIsNotPresent() {
+        // Given
+        Long id = -1L;
+
+        // When
+        var actual = undertest.existsById(id);
 
         // Then
         assertThat(actual).isFalse();
