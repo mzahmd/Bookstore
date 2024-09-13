@@ -7,9 +7,9 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  Input,
   useDisclosure,
 } from "@chakra-ui/react";
+import CreateBookForm from "./CreateBookForm";
 
 const AddIcon = () => "+";
 
@@ -32,15 +32,7 @@ export default function DrawerForm() {
           <DrawerHeader>Create your account</DrawerHeader>
 
           <DrawerBody>
-            <form
-              id="my-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                console.log("submitted");
-              }}
-            >
-              <Input name="nickname" placeholder="Type here..." />
-            </form>
+            <CreateBookForm />
           </DrawerBody>
 
           <DrawerFooter>
