@@ -22,9 +22,9 @@ export default function DrawerForm() {
         onClick={onOpen}
         colorScheme="teal"
       >
-        Create Book
+        Add a new Book
       </Button>
-      <Button onClick={onOpen}>Open</Button>
+      {/* <Button onClick={onOpen}>Open</Button> */}
       <Drawer isOpen={isOpen} onClose={onClose} size={"xl"}>
         <DrawerOverlay />
         <DrawerContent>

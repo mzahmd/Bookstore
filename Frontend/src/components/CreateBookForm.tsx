@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, Box, FormLabel, Input } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, FormLabel, Input, Text } from "@chakra-ui/react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 
@@ -24,7 +24,7 @@ const MyTextInput = ({ label, ...props }) => {
 const CreateBookForm = () => {
   return (
     <>
-      <h1>Füge ein Buch hinzu</h1>
+      <Text as={"b"}>Add a new Book</Text>
       <Formik
         initialValues={{
           title: "",
@@ -49,14 +49,14 @@ const CreateBookForm = () => {
       >
         <Form>
           <MyTextInput
-            label="Buch Titel"
+            label="book title"
             name="title"
             type="text"
             placeholder="Harry Potter"
           />
 
           <MyTextInput
-            label="Buch Autor"
+            label="book author"
             name="author"
             type="text"
             placeholder="J.K. Rowling"
