@@ -3,22 +3,24 @@ import { Wrap, WrapItem } from "@chakra-ui/react";
 import Card from "./components/Card";
 import SidebarWithHeader from "./components/Sidebar";
 import { TBook } from "./entities/book";
-import { getCustomer } from "./services/client";
+import { getBook } from "./services/client";
 import DrawerForm from "./components/DrawerForm";
 
 function App() {
   const [books, setBooks] = useState<TBook[] | []>([]);
 
+  const fetchBook = () => getBook()
+  .then((r) => setBooks(r?.data))
+  .catch((e) => console.log(e));
+
   useEffect(() => {
-    getCustomer()
-      .then((r) => setBooks(r?.data))
-      .catch((e) => console.log(e));
+    fetchBook()
   }, []);
 
   return (
     <>
       <SidebarWithHeader>
-        <DrawerForm />
+        <DrawerForm fetchBook={fetchBook} />
         <Wrap>
           {books.map((book, index) => (
             <WrapItem key={index}>

@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
+import { saveBook } from "../services/client";
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -29,7 +30,7 @@ const MyTextInput = ({ label, ...props }) => {
   );
 };
 
-const CreateBookForm = () => {
+const CreateBookForm = ({ fetchBook }: { fetchBook: () => void }) => {
   return (
     <>
       <Formik
@@ -47,39 +48,55 @@ const CreateBookForm = () => {
             .required("Required"),
           isbn: Yup.string().min(1, "Invalid ISBN").required("Required"),
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={(newBook, { setSubmitting }) => {
+          // setTimeout(() => {
+          //   alert(JSON.stringify(values, null, 2));
+          //   setSubmitting(false);
+          // }, 400);
+          setSubmitting(true);
+          saveBook(newBook)
+            .then((res) => {
+              alert("book saved");
+              fetchBook();
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .finally(() => {
+              setSubmitting(false);
+            });
         }}
       >
-        <Form>
-          <Stack spacing={"24px"}>
-            <MyTextInput
-              label="book title"
-              name="title"
-              type="text"
-              placeholder="Harry Potter"
-            />
+        {({ isValid, isSubmitting }) => (
+          <Form>
+            <Stack spacing={"24px"}>
+              <MyTextInput
+                label="book title"
+                name="title"
+                type="text"
+                placeholder="Harry Potter"
+              />
 
-            <MyTextInput
-              label="book author"
-              name="author"
-              type="text"
-              placeholder="J.K. Rowling"
-            />
+              <MyTextInput
+                label="book author"
+                name="author"
+                type="text"
+                placeholder="J.K. Rowling"
+              />
 
-            <MyTextInput
-              label="ISBN"
-              name="isbn"
-              type="text"
-              placeholder="123-456-789"
-            />
+              <MyTextInput
+                label="ISBN"
+                name="isbn"
+                type="text"
+                placeholder="123-456-789"
+              />
 
-            <Button type="submit">Submit</Button>
-          </Stack>
-        </Form>
+              <Button disabled={!isValid || isSubmitting} type="submit">
+                Submit
+              </Button>
+            </Stack>
+          </Form>
+        )}
       </Formik>
     </>
   );

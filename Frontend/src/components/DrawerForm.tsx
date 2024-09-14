@@ -14,7 +14,7 @@ import CreateBookForm from "./CreateBookForm";
 const AddIcon = () => "+";
 const CloseIcon = () => "X";
 
-export default function DrawerForm() {
+export default function DrawerForm({ fetchBook }: { fetchBook: () => void }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -28,7 +28,7 @@ export default function DrawerForm() {
           <DrawerHeader>Add a new Book</DrawerHeader>
 
           <DrawerBody>
-            <CreateBookForm />
+            <CreateBookForm fetchBook={fetchBook}/>
           </DrawerBody>
 
           <DrawerFooter>
