@@ -1,4 +1,12 @@
-import { Alert, AlertIcon, Box, FormLabel, Input, Text } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertIcon,
+  Box,
+  Button,
+  FormLabel,
+  Input,
+  Stack,
+} from "@chakra-ui/react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 
@@ -12,7 +20,7 @@ const MyTextInput = ({ label, ...props }) => {
       <FormLabel htmlFor={props.id || props.name}>{label}</FormLabel>
       <Input className="text-input" {...field} {...props} />
       {meta.touched && meta.error ? (
-        <Alert className="error">
+        <Alert className="error" status="error" mt={2}>
           <AlertIcon />
           {meta.error}
         </Alert>
@@ -24,7 +32,6 @@ const MyTextInput = ({ label, ...props }) => {
 const CreateBookForm = () => {
   return (
     <>
-      <Text as={"b"}>Add a new Book</Text>
       <Formik
         initialValues={{
           title: "",
@@ -48,28 +55,30 @@ const CreateBookForm = () => {
         }}
       >
         <Form>
-          <MyTextInput
-            label="book title"
-            name="title"
-            type="text"
-            placeholder="Harry Potter"
-          />
+          <Stack spacing={"24px"}>
+            <MyTextInput
+              label="book title"
+              name="title"
+              type="text"
+              placeholder="Harry Potter"
+            />
 
-          <MyTextInput
-            label="book author"
-            name="author"
-            type="text"
-            placeholder="J.K. Rowling"
-          />
+            <MyTextInput
+              label="book author"
+              name="author"
+              type="text"
+              placeholder="J.K. Rowling"
+            />
 
-          <MyTextInput
-            label="ISBN"
-            name="isbn"
-            type="text"
-            placeholder="123-456-789"
-          />
+            <MyTextInput
+              label="ISBN"
+              name="isbn"
+              type="text"
+              placeholder="123-456-789"
+            />
 
-          <button type="submit">Submit</button>
+            <Button type="submit">Submit</Button>
+          </Stack>
         </Form>
       </Formik>
     </>
