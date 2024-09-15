@@ -10,6 +10,7 @@ import {
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { saveBook } from "../services/client";
+import { errorNotification, successNotification } from "./Notification";
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -55,12 +56,22 @@ const CreateBookForm = ({ fetchBook }: { fetchBook: () => void }) => {
           // }, 400);
           setSubmitting(true);
           saveBook(newBook)
-            .then((res) => {
-              alert("book saved");
+            .then(() => {
+              console.log("GESCHAFFT");
+              
+              successNotification(
+                "book saved",
+                `${newBook.title} is successfully saved`
+              );
               fetchBook();
             })
             .catch((err) => {
-              console.log(err);
+              console.log("NICHT GESCHAFFT");
+
+              errorNotification(
+                err.code,
+                `${err.response.data.msg}`
+              );
             })
             .finally(() => {
               setSubmitting(false);

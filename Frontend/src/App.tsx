@@ -5,16 +5,20 @@ import SidebarWithHeader from "./components/Sidebar";
 import { TBook } from "./entities/book";
 import { getBook } from "./services/client";
 import DrawerForm from "./components/DrawerForm";
+import { errorNotification } from "./components/Notification";
 
 function App() {
   const [books, setBooks] = useState<TBook[] | []>([]);
 
-  const fetchBook = () => getBook()
-  .then((r) => setBooks(r?.data))
-  .catch((e) => console.log(e));
+  const fetchBook = () =>
+    getBook()
+      .then((r) => setBooks(r?.data))
+      .catch((err) =>
+        errorNotification(err.code, `${err.response.data.msg}`)
+      );
 
   useEffect(() => {
-    fetchBook()
+    fetchBook();
   }, []);
 
   return (
