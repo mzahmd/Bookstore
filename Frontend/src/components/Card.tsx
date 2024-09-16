@@ -79,7 +79,9 @@ export default function Card({ title, isbn, author }: ICard) {
               $199
             </Text> */}
           </Stack>
-          <AlertDialogExample isbn={isbn}/>
+          <Stack>
+            <AlertDialogExample isbn={isbn} />
+          </Stack>
         </Stack>
       </Box>
     </Center>
