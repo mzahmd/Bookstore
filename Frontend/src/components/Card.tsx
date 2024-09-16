@@ -110,7 +110,8 @@ export default function Card({ title, isbn, author, fetchBooks }: ICard) {
                   </AlertDialogHeader>
 
                   <AlertDialogBody>
-                    Are you sure you want to delete {title} ? You can't undo this action afterwards.
+                    Are you sure you want to delete {title} ? You can't undo
+                    this action afterwards.
                   </AlertDialogBody>
 
                   <AlertDialogFooter>
@@ -126,6 +127,7 @@ export default function Card({ title, isbn, author, fetchBooks }: ICard) {
                               "Book deleted",
                               `${title} was successfully deleted`
                             );
+                            fetchBooks();
                           })
                           .catch((err) => {
                             console.log(err);
