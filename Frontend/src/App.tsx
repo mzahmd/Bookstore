@@ -10,7 +10,7 @@ import { errorNotification } from "./components/Notification";
 function App() {
   const [books, setBooks] = useState<TBook[] | []>([]);
 
-  const fetchBook = () =>
+  const fetchBooks = () =>
     getBook()
       .then((r) => setBooks(r?.data))
       .catch((err) =>
@@ -18,17 +18,17 @@ function App() {
       );
 
   useEffect(() => {
-    fetchBook();
+    fetchBooks();
   }, []);
 
   return (
     <>
       <SidebarWithHeader>
-        <DrawerForm fetchBook={fetchBook} />
+        <DrawerForm fetchBooks={fetchBooks} />
         <Wrap>
           {books.map((book, index) => (
             <WrapItem key={index}>
-              <Card {...book} />
+              <Card {...book} fetchBooks={fetchBooks}/>
             </WrapItem>
           ))}
         </Wrap>

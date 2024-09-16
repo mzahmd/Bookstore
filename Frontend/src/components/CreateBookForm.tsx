@@ -31,7 +31,7 @@ const MyTextInput = ({ label, ...props }) => {
   );
 };
 
-const CreateBookForm = ({ fetchBook }: { fetchBook: () => void }) => {
+const CreateBookForm = ({ fetchBooks }: { fetchBooks: () => void }) => {
   return (
     <>
       <Formik
@@ -63,7 +63,7 @@ const CreateBookForm = ({ fetchBook }: { fetchBook: () => void }) => {
                 "book saved",
                 `${newBook.title} is successfully saved`
               );
-              fetchBook();
+              fetchBooks();
             })
             .catch((err) => {
               console.log("NICHT GESCHAFFT");

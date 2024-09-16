@@ -1,13 +1,23 @@
+import React from "react";
 import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
   Box,
+  Button,
   Center,
-  useColorModeValue,
   Heading,
-  Text,
-  Stack,
   Image,
+  Stack,
+  Text,
+  useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
-import AlertDialogExample from "./DeleteBTN";
+import { deleteBook } from "../services/client";
+import { errorNotification, successNotification } from "./Notification";
 
 const IMAGE =
   "https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80";
@@ -16,9 +26,13 @@ interface ICard {
   title: string;
   isbn: string;
   author: string;
+  fetchBooks: () => void;
 }
 
-export default function Card({ title, isbn, author }: ICard) {
+export default function Card({ title, isbn, author, fetchBooks }: ICard) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
+
   return (
     <Center py={12}>
       <Box
@@ -80,7 +94,58 @@ export default function Card({ title, isbn, author }: ICard) {
             </Text> */}
           </Stack>
           <Stack>
-            <AlertDialogExample isbn={isbn} />
+            <Button colorScheme="red" onClick={onOpen}>
+              Delete Customer
+            </Button>
+
+            <AlertDialog
+              isOpen={isOpen}
+              leastDestructiveRef={cancelRef}
+              onClose={onClose}
+            >
+              <AlertDialogOverlay>
+                <AlertDialogContent>
+                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    Delete Book
+                  </AlertDialogHeader>
+
+                  <AlertDialogBody>
+                    Are you sure you want to delete {title} ? You can't undo this action afterwards.
+                  </AlertDialogBody>
+
+                  <AlertDialogFooter>
+                    <Button ref={cancelRef} onClick={onClose}>
+                      Cancel
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      onClick={() => {
+                        deleteBook(isbn)
+                          .then(() => {
+                            successNotification(
+                              "Book deleted",
+                              `${title} was successfully deleted`
+                            );
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                            errorNotification(
+                              err.code,
+                              `${err.response.data.msg}`
+                            );
+                          })
+                          .finally(() => {
+                            onClose();
+                          });
+                      }}
+                      ml={3}
+                    >
+                      Delete
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialogOverlay>
+            </AlertDialog>
           </Stack>
         </Stack>
       </Box>
