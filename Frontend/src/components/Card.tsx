@@ -31,7 +31,7 @@ interface ICard {
 
 export default function Card({ title, isbn, author, fetchBooks }: ICard) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = React.useRef();
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
 
   return (
     <Center py={12}>
