@@ -12,7 +12,7 @@ export function notification(
     description,
     status,
     isClosable: true,
-    duration: 4000
+    duration: 4000,
   });
 }
 

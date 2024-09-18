@@ -90,9 +90,6 @@ export default function Card({ title, isbn, author, fetchBooks }: ICard) {
             <Text fontWeight={800} fontSize={"xl"}>
               {isbn}
             </Text>
-            {/* <Text textDecoration={"line-through"} color={"gray.600"}>
-              $199
-            </Text> */}
           </Stack>
           <Stack direction={"row"}>
             <Box>
@@ -103,7 +100,7 @@ export default function Card({ title, isbn, author, fetchBooks }: ICard) {
                 Delete Book
               </Button>
             </Box>
-
+            
             <AlertDialog
               isOpen={isOpen}
               leastDestructiveRef={cancelRef}
