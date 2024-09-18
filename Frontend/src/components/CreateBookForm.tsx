@@ -25,6 +25,7 @@ const MyTextInput = ({
   // which we can spread on <input>. We can use field meta to show an error
   // message if the field is invalid and it has been touched (i.e. visited)
   const [field, meta] = useField(props);
+  
   return (
     <Box>
       <FormLabel htmlFor={props.name}>{label}</FormLabel>
@@ -72,6 +73,7 @@ const CreateBookForm = ({ fetchBooks }: { fetchBooks: () => void }) => {
               fetchBooks();
             })
             .catch((err) => {
+              console.log(err);
               errorNotification(err.code, `${err.response.data.msg}`);
             })
             .finally(() => {
