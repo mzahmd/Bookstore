@@ -4,8 +4,8 @@ import Card from "./components/Card";
 import SidebarWithHeader from "./components/Sidebar";
 import { TBook } from "./entities/book";
 import { getBook } from "./services/client";
-import DrawerForm from "./components/DrawerForm";
 import { errorNotification } from "./components/Notification";
+import CreateDrawerForm from "./components/CreateDrawerForm";
 
 function App() {
   const [books, setBooks] = useState<TBook[] | []>([]);
@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <SidebarWithHeader>
-        <DrawerForm fetchBooks={fetchBooks} />
+        <CreateDrawerForm fetchBooks={fetchBooks} />
         <Wrap>
           {books.map((book, index) => (
             <WrapItem key={index}>
