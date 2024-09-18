@@ -94,8 +94,11 @@ export default function Card({ title, isbn, author, fetchBooks }: ICard) {
             </Text> */}
           </Stack>
           <Stack>
+            <Button>
+              Update Book
+            </Button>
             <Button colorScheme="red" onClick={onOpen}>
-              Delete Customer
+              Delete Book
             </Button>
 
             <AlertDialog
