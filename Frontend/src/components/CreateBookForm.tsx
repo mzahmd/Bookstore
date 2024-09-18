@@ -57,8 +57,6 @@ const CreateBookForm = ({ fetchBooks }: { fetchBooks: () => void }) => {
           setSubmitting(true);
           saveBook(newBook)
             .then(() => {
-              console.log("GESCHAFFT");
-              
               successNotification(
                 "book saved",
                 `${newBook.title} is successfully saved`
@@ -66,8 +64,6 @@ const CreateBookForm = ({ fetchBooks }: { fetchBooks: () => void }) => {
               fetchBooks();
             })
             .catch((err) => {
-              console.log("NICHT GESCHAFFT");
-
               errorNotification(
                 err.code,
                 `${err.response.data.msg}`
