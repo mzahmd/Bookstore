@@ -94,11 +94,15 @@ export default function Card({ title, isbn, author, fetchBooks }: ICard) {
               $199
             </Text> */}
           </Stack>
-          <Stack>
-            <UpdateDrawerForm fetchBooks={fetchBooks} oldIsbn={isbn} />
-            <Button colorScheme="red" onClick={onOpen}>
-              Delete Book
-            </Button>
+          <Stack direction={"row"}>
+            <Box>
+              <UpdateDrawerForm fetchBooks={fetchBooks} oldIsbn={isbn} />
+            </Box>
+            <Box>
+              <Button colorScheme="red" onClick={onOpen}>
+                Delete Book
+              </Button>
+            </Box>
 
             <AlertDialog
               isOpen={isOpen}
