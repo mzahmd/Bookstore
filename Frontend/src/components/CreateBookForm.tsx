@@ -102,7 +102,6 @@ const CreateBookForm = ({ fetchBooks }: { fetchBooks: () => void }) => {
                 type="text"
                 placeholder="123-456-789"
               />
-
               <Button disabled={!isValid || isSubmitting} type="submit">
                 Submit
               </Button>
