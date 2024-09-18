@@ -21,3 +21,12 @@ export const deleteBook = async (isbn: string) => {
     `${import.meta.env.VITE_API_BASE_URL}/api/v1/book/${isbn}`,
   );
 };
+
+export const updateBook = async (isbn: string, book: TBook) => {
+  console.log(isbn);
+  
+  return await axios.put(
+    `${import.meta.env.VITE_API_BASE_URL}/api/v1/book/${isbn}`,
+    book
+  );
+};
