@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
 import { Wrap, WrapItem } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+
 import Card from "./components/Card";
-import SidebarWithHeader from "./components/Sidebar";
 import CreateDrawerForm from "./components/CreateDrawerForm";
 import { errorNotification } from "./components/Notification";
+import SidebarWithHeader from "./components/Sidebar";
 import { getBook } from "./services/client";
 import { TBook } from "./entities/book";
 
-function App() {
+export default function App() {
   const [books, setBooks] = useState<TBook[] | []>([]);
 
   const fetchBooks = () =>
@@ -36,5 +37,3 @@ function App() {
     </>
   );
 }
-
-export default App;
