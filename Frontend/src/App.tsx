@@ -1,5 +1,5 @@
-import { Wrap, WrapItem } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { Wrap, WrapItem } from "@chakra-ui/react";
 
 import Card from "./components/Card";
 import CreateDrawerForm from "./components/CreateDrawerForm";
@@ -14,9 +14,7 @@ export default function App() {
   const fetchBooks = () =>
     getBook()
       .then((r) => setBooks(r?.data))
-      .catch((err) =>
-        errorNotification(err.code, `${err.response.data.msg}`)
-      );
+      .catch((err) => errorNotification(err.code, `${err.response.data.msg}`));
 
   useEffect(() => {
     fetchBooks();
@@ -29,7 +27,7 @@ export default function App() {
         <Wrap>
           {books.map((book, index) => (
             <WrapItem key={index}>
-              <Card {...book} fetchBooks={fetchBooks}/>
+              <Card {...book} fetchBooks={fetchBooks} />
             </WrapItem>
           ))}
         </Wrap>
