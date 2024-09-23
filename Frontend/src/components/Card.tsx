@@ -100,7 +100,7 @@ export default function Card({ title, isbn, author, fetchBooks }: ICard) {
                 Delete Book
               </Button>
             </Box>
-            
+
             <AlertDialog
               isOpen={isOpen}
               leastDestructiveRef={cancelRef}

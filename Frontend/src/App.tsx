@@ -4,7 +4,7 @@ import { Wrap, WrapItem } from "@chakra-ui/react";
 import Card from "./components/Card";
 import CreateDrawerForm from "./components/CreateDrawerForm";
 import { errorNotification } from "./components/Notification";
-import SidebarWithHeader from "./components/Sidebar";
+import Sidebar from "./components/Sidebar";
 import { getBook } from "./services/client";
 import { TBook } from "./entities/book";
 
@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <SidebarWithHeader>
+      <Sidebar>
         <CreateDrawerForm fetchBooks={fetchBooks} />
         <Wrap>
           {books.map((book, index) => (
@@ -31,7 +31,7 @@ export default function App() {
             </WrapItem>
           ))}
         </Wrap>
-      </SidebarWithHeader>
+      </Sidebar>
     </>
   );
 }
