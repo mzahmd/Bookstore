@@ -2,7 +2,7 @@ import { createStandaloneToast } from "@chakra-ui/react";
 
 const { toast } = createStandaloneToast();
 
-export function notification(
+function notification(
   title: string,
   description: string,
   status: "info" | "warning" | "success" | "error" | "loading" | undefined
