@@ -94,14 +94,12 @@ export default function CreateBookForm({
                 type="text"
                 placeholder="Harry Potter"
               />
-
               <MyTextInput
                 label="book author"
                 name="author"
                 type="text"
                 placeholder="J.K. Rowling"
               />
-
               <MyTextInput
                 label="ISBN"
                 name="isbn"
