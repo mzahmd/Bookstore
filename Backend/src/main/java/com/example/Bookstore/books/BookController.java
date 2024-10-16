@@ -1,6 +1,9 @@
 package com.example.Bookstore.books;
 
+import com.example.Bookstore.jwt.JWTUtil;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,10 +21,12 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173/")
 public class BookController {
 
-    BookService bookService;
+    private final BookService bookService;
+    private final JWTUtil jwtUtil;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, JWTUtil jwtUtil) {
         this.bookService = bookService;
+        this.jwtUtil = jwtUtil;
     }
 
     @GetMapping
@@ -30,8 +35,12 @@ public class BookController {
     }
 
     @PostMapping
-    public void addBook(@RequestBody Book book) {
+    public ResponseEntity<?> addBook(@RequestBody Book book) {
         bookService.addBook(book);
+        String jwtToken = jwtUtil.issueToken("username", "ROLE_USER");
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
+                .build();
     }
 
     @PutMapping("{isbn}")
