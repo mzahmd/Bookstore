@@ -3,6 +3,8 @@ package com.example.Bookstore.customer;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerService {
 
@@ -12,6 +14,10 @@ public class CustomerService {
     public CustomerService(CustomerDao customerDao, PasswordEncoder passwordEncoder) {
         this.customerDao = customerDao;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    public List<Customer> getCustomers() {
+        return customerDao.getCustomers();
     }
 
     public void addCustomer(Customer customer) {
