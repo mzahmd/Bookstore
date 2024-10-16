@@ -8,7 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-
+@Entity
+//@Table(name = "Customer")
 public class Customer implements UserDetails {
 
     @Id
@@ -22,39 +23,39 @@ public class Customer implements UserDetails {
             generator = "customer_id_seq"
     )
     private Integer id;
-    @Column(
-            nullable = false
-    )
+
+    @Column(nullable = false)
     private String name;
-    @Column(
-            nullable = false
-    )
+
+    @Column(nullable = false)
     private String email;
-    @Column(
-            nullable = false
-    )
+
+    @Column(nullable = false)
     private Integer age;
 
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String password;
+
+    public Integer getId() {
+        return id;
+    }
 
     public Customer() {
     }
 
-    public Customer(Integer id,
-                    String name,
-                    String email,
-                    String password,
-                    Integer age,
-                    Gender gender) {
+    public Customer(String name, String email, String password, Integer age, Gender gender) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    public Customer(Integer id, String name, String email, String password, Integer age, Gender gender) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -63,17 +64,46 @@ public class Customer implements UserDetails {
         this.gender = gender;
     }
 
-    public Customer(String name,
-                    String email,
-                    String password,
-                    Integer age,
-                    Gender gender) {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
-        this.password = password;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

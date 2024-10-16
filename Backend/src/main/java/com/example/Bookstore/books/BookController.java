@@ -22,11 +22,10 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
-    private final JWTUtil jwtUtil;
+//    private final JWTUtil jwtUtil;
 
-    public BookController(BookService bookService, JWTUtil jwtUtil) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
-        this.jwtUtil = jwtUtil;
     }
 
     @GetMapping
@@ -35,12 +34,12 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addBook(@RequestBody Book book) {
+    public void addBook(@RequestBody Book book) {
         bookService.addBook(book);
-        String jwtToken = jwtUtil.issueToken("username", "ROLE_USER");
+/*        String jwtToken = jwtUtil.issueToken("username", "ROLE_USER");
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
-                .build();
+                .build();*/
     }
 
     @PutMapping("{isbn}")

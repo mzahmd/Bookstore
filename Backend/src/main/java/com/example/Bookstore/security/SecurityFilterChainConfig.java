@@ -17,7 +17,7 @@ public class SecurityFilterChainConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auths ->
-                        auths.requestMatchers(HttpMethod.POST, "/api/v1/book")
+                        auths.requestMatchers(HttpMethod.POST, "/api/v1/customer")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated());

@@ -4,8 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerDataAccessService implements CustomerDao {
-
-    private final CustomerRepository customerRepository;
+    CustomerRepository customerRepository;
 
     public CustomerDataAccessService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
