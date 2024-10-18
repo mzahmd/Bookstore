@@ -3,6 +3,7 @@ package com.example.Bookstore.customer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerDataAccessService implements CustomerDao {
@@ -20,5 +21,10 @@ public class CustomerDataAccessService implements CustomerDao {
     @Override
     public void add(Customer customer) {
         customerRepository.save(customer);
+    }
+
+    @Override
+    public Optional<Customer> selectCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
     }
 }

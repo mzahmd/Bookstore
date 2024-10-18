@@ -8,8 +8,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerUserDetailsService implements UserDetailsService {
 
+    private final CustomerDao customerDao;
+
+    public CustomerUserDetailsService(CustomerDao customerDao) {
+        this.customerDao = customerDao;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return customerDao.selectCustomerByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User: " + username + " not Found"));
     }
 }
