@@ -10,14 +10,19 @@ public class CustomerService {
 
     private final CustomerDao customerDao;
     private final PasswordEncoder passwordEncoder;
+    private final CustomerDTOMapper customerDTOMapper;
 
-    public CustomerService(CustomerDao customerDao, PasswordEncoder passwordEncoder) {
+    public CustomerService(CustomerDao customerDao, PasswordEncoder passwordEncoder, CustomerDTOMapper customerDTOMapper) {
         this.customerDao = customerDao;
         this.passwordEncoder = passwordEncoder;
+        this.customerDTOMapper = customerDTOMapper;
     }
 
-    public List<Customer> getCustomers() {
-        return customerDao.getCustomers();
+    public List<CustomerDTO> getAllCustomers() {
+        return customerDao.getAllCustomers()
+                .stream()
+                .map(customerDTOMapper)
+                .toList();
     }
 
     public void addCustomer(Customer customer) {

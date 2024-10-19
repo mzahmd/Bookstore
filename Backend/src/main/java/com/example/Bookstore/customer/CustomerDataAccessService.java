@@ -14,7 +14,7 @@ public class CustomerDataAccessService implements CustomerDao {
     }
 
     @Override
-    public List<Customer> getCustomers() {
+    public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
