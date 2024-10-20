@@ -34,16 +34,18 @@ public class SecurityFilterChainConfig {
                                 auths.requestMatchers(HttpMethod.POST, "/api/v1/customer")
                                         .permitAll()
                                         .anyRequest()
-                                        .authenticated()
-                                        .and()
-                                        .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                                        .authenticationProvider(authenticationProvider)
-                                        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                                        .authenticated();
+//                                        .and()
+//                                        .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                                        .authenticationProvider(authenticationProvider)
+//                                        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
                         }
-                );
+                ).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); ;
 
         return http.build();
     }
