@@ -25,6 +25,6 @@ public class CustomerDataAccessService implements CustomerDao {
 
     @Override
     public Optional<Customer> selectCustomerByEmail(String email) {
-        return customerRepository.findByEmail(email);
+        return customerRepository.findCustomerByEmail(email);
     }
 }
