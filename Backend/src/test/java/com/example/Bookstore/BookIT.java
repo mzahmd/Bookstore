@@ -38,9 +38,6 @@ public class BookIT {
                 .get(HttpHeaders.AUTHORIZATION)
                 .get(0);
 
-        System.out.println("Mein TOken: " + jwtToken);
-
-
         // get all books
         webTestClient.get()
                 .uri(BOOK_PATH)
