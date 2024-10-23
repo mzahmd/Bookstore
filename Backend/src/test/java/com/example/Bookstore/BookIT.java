@@ -2,6 +2,7 @@ package com.example.Bookstore;
 
 import com.example.Bookstore.customer.Customer;
 import com.example.Bookstore.customer.Gender;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
+
+import java.util.Random;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BookIT {
@@ -22,8 +25,15 @@ public class BookIT {
 
     @Test
     void canGetBooks() {
+        Random random = new Random();
+        Faker faker = new Faker();
 
-        Customer register = new Customer("Max Mustermann", "max.mustermann@gmail.com", "password", 33, Gender.Male);
+        String fullName = faker.name().fullName();
+        String email = faker.name().firstName() + " " + faker.name().lastName() + " @gmail.com";
+        int age = random.nextInt(1, 100);
+        Gender gender = age % 2 == 0 ? Gender.Male : Gender.Female;
+
+        Customer register = new Customer(fullName, email, "password", age, gender);
 
         String jwtToken = webTestClient.post()
                 .uri(CUSTOMER_PATH)
