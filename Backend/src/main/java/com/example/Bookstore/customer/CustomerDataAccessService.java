@@ -1,5 +1,6 @@
 package com.example.Bookstore.customer;
 
+import com.example.Bookstore.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,12 @@ public class CustomerDataAccessService implements CustomerDao {
     @Override
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
+    }
+
+    @Override
+    public Customer getCustomerById(Integer id) {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer with the id " + id + " not found"));
     }
 
     @Override

@@ -23,6 +23,11 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
+    @GetMapping("/{customerId}")
+    public CustomerDTO getCustomerById(@PathVariable Integer customerId) {
+        return customerService.getCustomerById(customerId);
+    }
+
     @PostMapping
     public ResponseEntity<?> registerCustomer(@RequestBody Customer customer) {
         customerService.addCustomer(customer);

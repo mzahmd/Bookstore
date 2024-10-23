@@ -25,6 +25,10 @@ public class CustomerService {
                 .toList();
     }
 
+    public CustomerDTO getCustomerById(Integer id) {
+        return customerDTOMapper.apply(customerDao.getCustomerById(id));
+    }
+
     public void addCustomer(Customer customer) {
         Customer newCustomer = new Customer(
                 customer.getName(),

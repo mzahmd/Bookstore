@@ -5,6 +5,7 @@ import java.util.Optional;
 
 public interface CustomerDao {
     List<Customer> getAllCustomers();
+    Customer getCustomerById(Integer id);
     void add(Customer customer);
     Optional<Customer> selectCustomerByEmail(String email);
 }
