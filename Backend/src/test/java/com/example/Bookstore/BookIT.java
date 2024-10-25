@@ -29,7 +29,7 @@ public class BookIT {
         Faker faker = new Faker();
 
         String fullName = faker.name().fullName();
-        String email = faker.name().firstName() + " " + faker.name().lastName() + " @gmail.com";
+        String email = faker.name().firstName() + "." + faker.name().lastName() + "@gmail.com";
         int age = random.nextInt(1, 100);
         Gender gender = age % 2 == 0 ? Gender.Male : Gender.Female;
 
