@@ -34,7 +34,11 @@ public class SecurityFilterChainConfig {
                 .authorizeHttpRequests(auths ->
                         {
                             try {
-                                auths.requestMatchers(HttpMethod.POST, "/api/v1/customer")
+                                auths.requestMatchers(
+                                                HttpMethod.POST,
+                                                "/api/v1/customer",
+                                                "/api/v1/auth/login"
+                                        )
                                         .permitAll()
                                         .anyRequest()
                                         .authenticated();

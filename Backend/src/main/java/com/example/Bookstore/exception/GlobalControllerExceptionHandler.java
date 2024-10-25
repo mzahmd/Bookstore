@@ -2,6 +2,7 @@ package com.example.Bookstore.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,6 +32,14 @@ public class GlobalControllerExceptionHandler {
         ApiError error = new ApiError(e.getMessage(), HttpStatus.FORBIDDEN.value());
 
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ApiError> defaultException(BadCredentialsException e) {
+
+        ApiError error = new ApiError(e.getMessage(), HttpStatus.UNAUTHORIZED.value());
+
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(Exception.class)
