@@ -47,7 +47,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                 // contains the Information who's currently auhthenticated
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(subject);
-            System.out.println(userDetails);
 
             if (jwtUtil.isTokenValid(jwt, userDetails.getUsername())) {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
