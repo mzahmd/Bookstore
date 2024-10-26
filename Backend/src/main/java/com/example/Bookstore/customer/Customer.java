@@ -40,10 +40,6 @@ public class Customer implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    public Integer getId() {
-        return id;
-    }
-
     public Customer() {
     }
 
@@ -62,6 +58,10 @@ public class Customer implements UserDetails {
         this.password = password;
         this.age = age;
         this.gender = gender;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public void setId(Integer id) {

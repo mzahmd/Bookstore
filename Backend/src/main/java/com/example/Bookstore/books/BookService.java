@@ -7,7 +7,7 @@ import java.util.List;
 @Service
 public class BookService {
 
-    BookDao bookDao;
+    private final BookDao bookDao;
 
     public BookService(BookDao bookDao) {
         this.bookDao = bookDao;
