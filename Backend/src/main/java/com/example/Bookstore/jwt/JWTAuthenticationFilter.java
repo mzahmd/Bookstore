@@ -1,6 +1,5 @@
 package com.example.Bookstore.jwt;
 
-import com.example.Bookstore.customer.CustomerUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

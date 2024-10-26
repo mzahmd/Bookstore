@@ -22,7 +22,6 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
-//    private final JWTUtil jwtUtil;
 
     public BookController(BookService bookService) {
         this.bookService = bookService;
@@ -36,10 +35,6 @@ public class BookController {
     @PostMapping
     public void addBook(@RequestBody Book book) {
         bookService.addBook(book);
-/*        String jwtToken = jwtUtil.issueToken("username", "ROLE_USER");
-        return ResponseEntity.ok()
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
-                .build();*/
     }
 
     @PutMapping("{isbn}")
