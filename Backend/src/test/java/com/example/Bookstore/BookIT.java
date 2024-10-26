@@ -31,7 +31,7 @@ public class BookIT {
         String fullName = faker.name().fullName();
         String email = faker.name().firstName() + "." + faker.name().lastName() + "@gmail.com";
         int age = random.nextInt(1, 100);
-        Gender gender = age % 2 == 0 ? Gender.Male : Gender.Female;
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
 
         Customer register = new Customer(fullName, email, "password", age, gender);
 
