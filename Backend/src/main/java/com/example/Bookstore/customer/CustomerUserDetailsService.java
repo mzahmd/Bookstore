@@ -1,5 +1,6 @@
 package com.example.Bookstore.customer;
 
+import com.example.Bookstore.exception.ResourceNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +17,10 @@ public class CustomerUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return customerDao.selectCustomerByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User: " + username + " not Found"));
+        try {
+            return customerDao.getCustomerByEmail(username);
+        } catch (ResourceNotFoundException e) {
+            throw new UsernameNotFoundException("User: " + username + " not Found");
+        }
     }
 }

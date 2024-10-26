@@ -4,7 +4,6 @@ import com.example.Bookstore.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerDataAccessService implements CustomerDao {
@@ -31,7 +30,8 @@ public class CustomerDataAccessService implements CustomerDao {
     }
 
     @Override
-    public Optional<Customer> selectCustomerByEmail(String email) {
-        return customerRepository.findCustomerByEmail(email);
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findCustomerByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer with the email " + email + " not found"));
     }
 }
