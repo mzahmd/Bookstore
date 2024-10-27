@@ -26,9 +26,8 @@ public class BookConfig {
             bookRepository.save(book2);
             bookRepository.save(book3);
 
-            customerRepository.save(new Customer("Max Mustermann", "max.mustermann@gmail.com", passwordEncoder.encode(UUID.randomUUID().toString()), 18, Gender.Male));
-            customerRepository.save(new Customer("Anna Max", "anna.max@gmail.com", "password", 33, Gender.Female));
+            customerRepository.save(new Customer("Max Mustermann", "max.mustermann@gmail.com", passwordEncoder.encode(UUID.randomUUID().toString()), 18, Gender.MALE));
+            customerRepository.save(new Customer("Anna Max", "anna.max@gmail.com", "password", 33, Gender.FEMALE));
         };
     }
-
 }

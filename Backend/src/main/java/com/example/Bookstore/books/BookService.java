@@ -8,21 +8,25 @@ import java.util.List;
 public class BookService {
 
     private final BookDao bookDao;
+    private final BookDTOMapper bookDTOMapper;
 
-    public BookService(BookDao bookDao) {
+    public BookService(BookDao bookDao, BookDTOMapper bookDTOMapper) {
         this.bookDao = bookDao;
+        this.bookDTOMapper = bookDTOMapper;
     }
 
-    List<Book> getBooks() {
-        return bookDao.getBooks();
+    List<BookDTO> getBooks() {
+        return bookDao.getBooks().stream()
+                .map(bookDTOMapper)
+                .toList();
     }
 
     void addBook(Book newBook) {
         bookDao.addBook(newBook);
     }
 
-    void updateBook(String isbn, Book updateBook) {
-        bookDao.updateBook(isbn, updateBook);
+    void updateBook(String isbn, Book updatedBook) {
+        bookDao.updateBook(isbn, updatedBook);
     }
 
     public void deleteBook(String isbn) {
