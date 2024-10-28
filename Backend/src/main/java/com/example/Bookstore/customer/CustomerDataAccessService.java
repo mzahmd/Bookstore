@@ -25,7 +25,7 @@ public class CustomerDataAccessService implements CustomerDao {
     }
 
     @Override
-    public void add(Customer customer) {
+    public void addCustomer(Customer customer) {
         customerRepository.save(customer);
     }
 

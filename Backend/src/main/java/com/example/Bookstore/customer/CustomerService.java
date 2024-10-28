@@ -37,6 +37,6 @@ public class CustomerService {
                 customer.getAge(),
                 customer.getGender()
         );
-        customerDao.add(newCustomer);
+        customerDao.addCustomer(newCustomer);
     }
 }
