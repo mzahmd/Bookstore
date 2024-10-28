@@ -5,6 +5,6 @@ import java.util.List;
 public interface CustomerDao {
     List<Customer> getAllCustomers();
     Customer getCustomerById(Integer id);
-    void add(Customer customer);
+    void addCustomer(Customer customer);
     Customer getCustomerByEmail(String email);
 }
