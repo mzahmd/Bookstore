@@ -3,10 +3,11 @@ import { createRoot } from "react-dom/client";
 import { ChakraProvider, createStandaloneToast } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
+import Login from "./components/Login.tsx";
 
 const { ToastContainer } = createStandaloneToast();
 
-const Login = () => <h1>Login page</h1>;
+// const Login = () => <h1>Login page</h1>;
 
 const router = createBrowserRouter([
   {
