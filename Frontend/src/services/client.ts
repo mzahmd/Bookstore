@@ -24,3 +24,10 @@ export const updateBook = async (isbn: string, book: TBook) => {
     book
   );
 };
+
+export const createCustomer = async ({ userName, password }: {userName: string, password: string}) => {
+  return await axios.post(
+    `${import.meta.env.VITE_API_BASE_URL}/api/v1/customer`,
+    { userName, password }
+  );
+};
