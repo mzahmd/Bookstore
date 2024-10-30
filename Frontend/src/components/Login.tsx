@@ -8,13 +8,12 @@ import {
   Heading,
   Input,
   Stack,
-  Image,
 } from '@chakra-ui/react'
 
 export default function Login() {
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
-      <Flex p={8} flex={1} align={'center'} justify={'center'}>
+      <Flex p={8} flex={1} align={'center'} justify={'center'} bgGradient={{sm: "linear(to-r, blue.200, purple.400)"}}>
         <Stack spacing={4} w={'full'} maxW={'md'}>
           <Heading fontSize={'2xl'}>Sign in to your account</Heading>
           <FormControl id="email">
