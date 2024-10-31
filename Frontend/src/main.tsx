@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ChakraProvider, createStandaloneToast } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AuthProvider from "./components/AuthContext.tsx";
 import App from "./App.tsx";
 import Login from "./components/Login.tsx";
 
@@ -18,14 +19,16 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <App />
-  }
+    element: <App />,
+  },
 ]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ChakraProvider>
-      <RouterProvider router={router}/>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
       <ToastContainer />
     </ChakraProvider>
   </StrictMode>

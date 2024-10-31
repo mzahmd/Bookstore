@@ -25,9 +25,25 @@ export const updateBook = async (isbn: string, book: TBook) => {
   );
 };
 
-export const createCustomer = async ({ userName, password }: {userName: string, password: string}) => {
+export const performLogin = async (userNameAndPassword: {
+  userName: string;
+  password: string;
+}) => {
   return await axios.post(
-    `${import.meta.env.VITE_API_BASE_URL}/api/v1/customer`,
-    { userName, password }
+    `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/login`,
+    userNameAndPassword
   );
 };
+
+// export const createCustomer = async ({
+//   userName,
+//   password,
+// }: {
+//   userName: string;
+//   password: string;
+// }) => {
+//   return await axios.post(
+//     `${import.meta.env.VITE_API_BASE_URL}/api/v1/customer`,
+//     { userName, password }
+//   );
+// };

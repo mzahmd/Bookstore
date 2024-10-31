@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { createCustomer } from "../services/client";
+import { createContext, useContext, useState } from "react";
+import { performLogin } from "../services/client";
 
 const AuthContext = createContext({});
 
@@ -8,14 +8,16 @@ const AuthProvider = ({ children }) => {
 
   const login = async (userName: string, password: string) => {
     return new Promise((resolve, reject) => {
-      createCustomer({ userName, password })
+      performLogin({ userName, password })
         .then((res) => {
           // TODO: save the token
           const jwtToken = res.headers["authorization"];
+          console.log(jwtToken);
+          
           setCustomer({
             ...res.data.customerDTO,
           });
-          resolve();
+          resolve(res);
         })
         .catch((err) => {
           reject(err);
@@ -27,7 +29,7 @@ const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         customer,
-        createCustomer,
+        login,
       }}
     >
       {children}
