@@ -64,14 +64,13 @@ function LoginForm() {
         // alert(JSON.stringify(values, null, 0));
         setSubmitting(true);
         console.log(values);
-        
+
         login(JSON.stringify(values))
           .then((res) => {
             // TODO: navigate to /dashboard
             console.log("Success login", res);
-            
           })
-          .catch(err => {
+          .catch((err) => {
             errorNotification(err.code, err.response.data.msg);
           })
           .finally(() => {
