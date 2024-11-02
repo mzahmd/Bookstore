@@ -57,7 +57,7 @@ function LoginForm() {
           .email("Must be valid email")
           .required("Email is required"),
         password: Yup.string()
-          .min(10, "Password is too short")
+          .min(5, "Password is too short")
           .required("Password is required"),
       })}
       onSubmit={(values, { setSubmitting }) => {

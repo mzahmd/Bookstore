@@ -6,14 +6,17 @@ const AuthContext = createContext({});
 const AuthProvider = ({ children }) => {
   const [customer, setCustomer] = useState(null);
 
-  const login = async (userName: string, password: string) => {
+  const login = async (userNameAndPassword: {
+    userName: string;
+    password: string;
+  }) => {
     return new Promise((resolve, reject) => {
-      performLogin({ userName, password })
+      performLogin(userNameAndPassword)
         .then((res) => {
           // TODO: save the token
           const jwtToken = res.headers["authorization"];
           console.log(jwtToken);
-          
+
           setCustomer({
             ...res.data.customerDTO,
           });
