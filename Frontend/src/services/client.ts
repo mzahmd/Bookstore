@@ -39,16 +39,3 @@ export const performLogin = async (userNameAndPassword: {
     }
   );
 };
-
-// export const createCustomer = async ({
-//   userName,
-//   password,
-// }: {
-//   userName: string;
-//   password: string;
-// }) => {
-//   return await axios.post(
-//     `${import.meta.env.VITE_API_BASE_URL}/api/v1/customer`,
-//     { userName, password }
-//   );
-// };
