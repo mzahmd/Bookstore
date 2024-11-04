@@ -3,7 +3,7 @@ import { performLogin } from "../services/client";
 
 const AuthContext = createContext({});
 
-const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [customer, setCustomer] = useState(null);
 
   const login = async (userNameAndPassword: {
