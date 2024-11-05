@@ -21,17 +21,15 @@ export default function App() {
   }, []);
 
   return (
-    <>
-      <Sidebar>
-        <CreateDrawerForm fetchBooks={fetchBooks} />
-        <Wrap>
-          {books.map((book, index) => (
-            <WrapItem key={index}>
-              <Card {...book} fetchBooks={fetchBooks} />
-            </WrapItem>
-          ))}
-        </Wrap>
-      </Sidebar>
-    </>
+    <Sidebar>
+      <CreateDrawerForm fetchBooks={fetchBooks} />
+      <Wrap>
+        {books.map((book, index) => (
+          <WrapItem key={index}>
+            <Card {...book} fetchBooks={fetchBooks} />
+          </WrapItem>
+        ))}
+      </Wrap>
+    </Sidebar>
   );
 }
