@@ -15,6 +15,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         .then((res) => {
           // TODO: save the token
           const jwtToken = res.headers["authorization"];
+          localStorage.setItem("access_token", jwtToken)
           console.log(jwtToken);
 
           setCustomer({
