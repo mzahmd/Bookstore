@@ -13,6 +13,7 @@ import { Form, Formik, useField } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "./AuthContext";
 import { errorNotification } from "./Notification";
+import { useNavigate } from "react-router-dom";
 
 const MyTextInput = ({
   label,
@@ -44,6 +45,7 @@ const MyTextInput = ({
 
 function LoginForm() {
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <Formik
@@ -66,9 +68,9 @@ function LoginForm() {
         console.log(values);
 
         login(JSON.stringify(values))
-          .then((res) => {
-            // TODO: navigate to /dashboard
-            console.log("Success login", res);
+          .then(() => {
+            navigate("/dashboard");
+            // console.log("Success login", res);
           })
           .catch((err) => {
             errorNotification(err.code, err.response.data.msg);
