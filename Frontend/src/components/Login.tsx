@@ -95,7 +95,6 @@ function LoginForm() {
               type="password"
               placeholder=""
             />
-
             <Button type="submit" disabled={!isValid || isSubmitting}>
               Login
             </Button>
