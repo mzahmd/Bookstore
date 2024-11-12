@@ -100,7 +100,6 @@ export default function Card({ title, isbn, author, fetchBooks }: ICard) {
                 Delete Book
               </Button>
             </Box>
-
             <AlertDialog
               isOpen={isOpen}
               leastDestructiveRef={cancelRef}
@@ -111,12 +110,10 @@ export default function Card({ title, isbn, author, fetchBooks }: ICard) {
                   <AlertDialogHeader fontSize="lg" fontWeight="bold">
                     Delete Book
                   </AlertDialogHeader>
-
                   <AlertDialogBody>
                     Are you sure you want to delete {title} ? You can't undo
                     this action afterwards.
                   </AlertDialogBody>
-
                   <AlertDialogFooter>
                     <Button ref={cancelRef} onClick={onClose}>
                       Cancel

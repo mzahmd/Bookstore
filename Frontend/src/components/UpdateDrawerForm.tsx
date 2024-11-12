@@ -30,11 +30,9 @@ export default function UpdateDrawerForm({
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Update a new Book</DrawerHeader>
-
           <DrawerBody>
             <UpdateBookForm fetchBooks={fetchBooks} oldIsbn={oldIsbn} />
           </DrawerBody>
-
           <DrawerFooter>
             <Button
               leftIcon={<CloseIcon />}
