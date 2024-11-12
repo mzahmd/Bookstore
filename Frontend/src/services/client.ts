@@ -3,7 +3,7 @@ import { TBook } from "../entities/book";
 
 const getAuthConfig = () => ({
   headers: {
-    Auhtorization: `Bearer ${localStorage.getItem("access_token")}`,
+    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   },
 });
 
