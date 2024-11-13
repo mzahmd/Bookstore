@@ -1,6 +1,11 @@
 import axios from "axios";
 import { TBook } from "../entities/book";
 
+type Credentials = {
+  userName: string;
+  password: string;
+};
+
 const getAuthConfig = () => ({
   headers: {
     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -36,10 +41,7 @@ export const updateBook = async (isbn: string, book: TBook) => {
   );
 };
 
-export const performLogin = async (userNameAndPassword: {
-  userName: string;
-  password: string;
-}) => {
+export const performLogin = async (userNameAndPassword: Credentials) => {
   return await axios.post(
     `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/login`,
     userNameAndPassword,
