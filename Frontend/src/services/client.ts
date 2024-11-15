@@ -1,10 +1,6 @@
 import axios from "axios";
 import { TBook } from "../entities/book";
-
-type Credentials = {
-  userName: string;
-  password: string;
-};
+import { Credentials } from "../types/Credentials";
 
 const getAuthConfig = () => ({
   headers: {
