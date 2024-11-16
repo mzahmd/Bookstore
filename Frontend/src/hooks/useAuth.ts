@@ -8,9 +8,9 @@ export function useAuth() {
     throw new Error("Context is not set");
   }
 
-  if (!context.customer) {
-    throw new Error("Customer is not set");
-  }
+  // if (!context.customer) {
+  //   throw new Error("Customer is not set");
+  // }
 
   if (!context.login) {
     throw new Error("Login is not set");

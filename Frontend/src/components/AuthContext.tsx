@@ -6,6 +6,7 @@ import { ICustomer } from "../entities/customer";
 interface IAuthContext {
   customer: ICustomer | null;
   login: (userNameAndPassword: ICredentials) => Promise<unknown>;
+  logout: () => void;
 }
 
 export const AuthContext = createContext<IAuthContext | null>(null);
@@ -36,11 +37,17 @@ export default function AuthProvider({ children }: Props) {
     });
   }
 
+  function logout() {
+    localStorage.removeItem("access_token");
+    setCustomer(null);
+  }
+
   return (
     <AuthContext.Provider
       value={{
         customer,
         login,
+        logout,
       }}
     >
       {children}
