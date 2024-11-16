@@ -1,13 +1,23 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { performLogin } from "../services/client";
-import { Credentials } from "../types/Credentials";
+import { ICredentials } from "../entities/credentials";
+import { ICustomer } from "../entities/customer";
 
-const AuthContext = createContext({});
+interface IAuthContext {
+  customer: ICustomer | null;
+  login: (userNameAndPassword: ICredentials) => Promise<unknown>;
+}
 
-export default function AuthProvider({ children }: { children: React.ReactNode }) {
+export const AuthContext = createContext<IAuthContext | null>(null);
+
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function AuthProvider({ children }: Props) {
   const [customer, setCustomer] = useState(null);
 
-  async function login(userNameAndPassword: Credentials) {
+  async function login(userNameAndPassword: ICredentials) {
     return new Promise((resolve, reject) => {
       performLogin(userNameAndPassword)
         .then((res) => {
@@ -37,5 +47,3 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     </AuthContext.Provider>
   );
 }
-
-export const useAuth = () => useContext(AuthContext);

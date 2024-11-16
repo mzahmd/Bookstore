@@ -1,4 +1,4 @@
-export  type Credentials = {
+export interface ICredentials {
   userName: string;
   password: string;
-};
+}
