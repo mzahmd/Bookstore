@@ -1,20 +1,28 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { performLogin } from "../services/client";
+import { ICredentials } from "../entities/credentials";
+import { ICustomer } from "../entities/customer";
 
-const AuthContext = createContext({});
+interface IAuthContext {
+  customer: ICustomer | null;
+  login: (userNameAndPassword: ICredentials) => Promise<unknown>;
+}
 
-const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthContext = createContext<IAuthContext | null>(null);
+
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function AuthProvider({ children }: Props) {
   const [customer, setCustomer] = useState(null);
 
-  const login = async (userNameAndPassword: {
-    userName: string;
-    password: string;
-  }) => {
+  async function login(userNameAndPassword: ICredentials) {
     return new Promise((resolve, reject) => {
       performLogin(userNameAndPassword)
         .then((res) => {
           const jwtToken = res.headers["authorization"];
-          localStorage.setItem("access_token", jwtToken)
+          localStorage.setItem("access_token", jwtToken);
           console.log(jwtToken);
 
           setCustomer({
@@ -26,7 +34,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           reject(err);
         });
     });
-  };
+  }
 
   return (
     <AuthContext.Provider
@@ -38,8 +46,4 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => useContext(AuthContext);
-
-export default AuthProvider;
+}
