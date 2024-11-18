@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function AuthProvider({ children }: Props) {
-  const [customer, setCustomer] = useState(null);
+  const [customer, setCustomer] = useState<ICustomer | null>(null);
 
   async function login(userNameAndPassword: ICredentials) {
     return new Promise((resolve, reject) => {

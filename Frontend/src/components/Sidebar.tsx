@@ -125,7 +125,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  const { logout } = useAuth();
+  const { logout, customer } = useAuth();
 
   return (
     <Flex
@@ -178,7 +178,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">{customer?.name}</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
