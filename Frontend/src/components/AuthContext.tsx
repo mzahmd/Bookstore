@@ -1,20 +1,29 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { performLogin } from "../services/client";
+import { ICredentials } from "../entities/credentials";
+import { ICustomer } from "../entities/customer";
 
-const AuthContext = createContext({});
+interface IAuthContext {
+  customer: ICustomer | null;
+  login: (userNameAndPassword: ICredentials) => Promise<unknown>;
+  logout: () => void;
+}
 
-const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [customer, setCustomer] = useState(null);
+export const AuthContext = createContext<IAuthContext | null>(null);
 
-  const login = async (userNameAndPassword: {
-    userName: string;
-    password: string;
-  }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function AuthProvider({ children }: Props) {
+  const [customer, setCustomer] = useState<ICustomer | null>(null);
+
+  async function login(userNameAndPassword: ICredentials) {
     return new Promise((resolve, reject) => {
       performLogin(userNameAndPassword)
         .then((res) => {
           const jwtToken = res.headers["authorization"];
-          localStorage.setItem("access_token", jwtToken)
+          localStorage.setItem("access_token", jwtToken);
           console.log(jwtToken);
 
           setCustomer({
@@ -26,20 +35,22 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           reject(err);
         });
     });
-  };
+  }
+
+  function logout() {
+    localStorage.removeItem("access_token");
+    setCustomer(null);
+  }
 
   return (
     <AuthContext.Provider
       value={{
         customer,
         login,
+        logout,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => useContext(AuthContext);
-
-export default AuthProvider;
+}

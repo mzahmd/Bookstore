@@ -97,7 +97,7 @@ export default function Card({ title, isbn, author, fetchBooks }: ICard) {
             </Box>
             <Box>
               <Button colorScheme="red" onClick={onOpen}>
-                Delete Book
+                Delete
               </Button>
             </Box>
             <AlertDialog

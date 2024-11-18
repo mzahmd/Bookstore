@@ -6,10 +6,10 @@ import CreateDrawerForm from "./components/CreateDrawerForm";
 import { errorNotification } from "./components/Notification";
 import Sidebar from "./components/Sidebar";
 import { getBook } from "./services/client";
-import { TBook } from "./entities/book";
+import { IBook } from "./entities/book";
 
 export default function App() {
-  const [books, setBooks] = useState<TBook[] | []>([]);
+  const [books, setBooks] = useState<IBook[]>([]);
 
   const fetchBooks = () =>
     getBook()

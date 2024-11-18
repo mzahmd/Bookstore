@@ -1,5 +1,6 @@
 import axios from "axios";
-import { TBook } from "../entities/book";
+import { IBook } from "../entities/book";
+import { ICredentials } from "../entities/credentials";
 
 const getAuthConfig = () => ({
   headers: {
@@ -14,10 +15,11 @@ export const getBook = async () => {
   );
 };
 
-export const saveBook = async (book: TBook) => {
+export const saveBook = async (book: IBook) => {
   return await axios.post(
     `${import.meta.env.VITE_API_BASE_URL}/api/v1/book`,
-    book
+    book,
+    getAuthConfig()
   );
 };
 
@@ -28,7 +30,7 @@ export const deleteBook = async (isbn: string) => {
   );
 };
 
-export const updateBook = async (isbn: string, book: TBook) => {
+export const updateBook = async (isbn: string, book: IBook) => {
   return await axios.put(
     `${import.meta.env.VITE_API_BASE_URL}/api/v1/book/${isbn}`,
     book,
@@ -36,13 +38,10 @@ export const updateBook = async (isbn: string, book: TBook) => {
   );
 };
 
-export const performLogin = async (userNameAndPassword: {
-  userName: string;
-  password: string;
-}) => {
+export const performLogin = async (userNameAndPassword: ICredentials) => {
   return await axios.post(
     `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/login`,
-    userNameAndPassword,
+    JSON.stringify(userNameAndPassword),
     {
       headers: {
         "Content-Type": "application/json",

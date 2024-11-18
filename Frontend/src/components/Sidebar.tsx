@@ -32,6 +32,7 @@ import {
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import reactSVG from "../assets/react.svg";
+import { useAuth } from "../hooks/useAuth";
 
 interface LinkItemProps {
   name: string;
@@ -124,6 +125,8 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const { logout, customer } = useAuth();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -175,7 +178,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">{customer?.name}</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
@@ -194,7 +197,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={logout}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
