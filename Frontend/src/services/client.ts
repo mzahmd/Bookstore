@@ -18,7 +18,8 @@ export const getBook = async () => {
 export const saveBook = async (book: IBook) => {
   return await axios.post(
     `${import.meta.env.VITE_API_BASE_URL}/api/v1/book`,
-    book
+    book,
+    getAuthConfig()
   );
 };
 
