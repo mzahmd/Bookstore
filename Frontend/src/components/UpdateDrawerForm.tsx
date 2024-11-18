@@ -24,7 +24,7 @@ export default function UpdateDrawerForm({
 
   return (
     <>
-      <Button onClick={onOpen}>Update Book</Button>
+      <Button onClick={onOpen}>Update</Button>
       <Drawer isOpen={isOpen} onClose={onClose} size={"xl"}>
         <DrawerOverlay />
         <DrawerContent>
