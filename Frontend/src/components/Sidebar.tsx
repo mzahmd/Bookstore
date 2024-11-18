@@ -180,7 +180,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 >
                   <Text fontSize="sm">{customer?.name}</Text>
                   <Text fontSize="xs" color="gray.600">
-                    Admin
+                    {customer?.roles}
                   </Text>
                 </VStack>
                 <Box display={{ base: "none", md: "flex" }}>
