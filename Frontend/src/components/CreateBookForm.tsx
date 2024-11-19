@@ -62,10 +62,6 @@ export default function CreateBookForm({
         isbn: Yup.string().min(1, "Invalid ISBN").required("Required"),
       })}
       onSubmit={(newBook, { setSubmitting }) => {
-        // setTimeout(() => {
-        //   alert(JSON.stringify(values, null, 2));
-        //   setSubmitting(false);
-        // }, 400);
         setSubmitting(true);
         saveBook(newBook)
           .then(() => {
