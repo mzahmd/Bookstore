@@ -1,12 +1,14 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { performLogin } from "../services/client";
 import { ICredentials } from "../entities/credentials";
 import { ICustomer } from "../entities/customer";
+import { jwtDecode } from "jwt-decode";
 
 interface IAuthContext {
   customer: ICustomer | null;
   login: (userNameAndPassword: ICredentials) => Promise<unknown>;
   logout: () => void;
+  isCustomerAuthenticated: () => boolean
 }
 
 export const AuthContext = createContext<IAuthContext | null>(null);
@@ -42,12 +44,31 @@ export default function AuthProvider({ children }: Props) {
     setCustomer(null);
   }
 
+  function isCustomerAuthenticated() {
+    const token = localStorage.getItem("acces_token");
+
+    if (!token) {
+      return false;
+    }
+
+    const {exp: expiration} = jwtDecode(token);
+    console.log(expiration);
+
+    if (expiration && Date.now() > expiration * 1000) {
+      logout();
+      return false;
+    }
+
+    return true;
+  }
+
   return (
     <AuthContext.Provider
       value={{
         customer,
         login,
         logout,
+        isCustomerAuthenticated
       }}
     >
       {children}

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 interface Props {
   children: React.ReactNode;
@@ -7,14 +8,13 @@ interface Props {
 
 export default function ProtectedRoute({ children }: Props) {
   const navigate = useNavigate();
-  
-  const isCustomerAuthenticated = false;
+  const { isCustomerAuthenticated } = useAuth();
 
   useEffect(() => {
-    if (!isCustomerAuthenticated) {
+    if (!isCustomerAuthenticated()) {
       navigate("/");
     }
   }, [isCustomerAuthenticated, navigate]);
 
-  return isCustomerAuthenticated ? children : <></>;
+  return isCustomerAuthenticated() ? children : <></>;
 }
