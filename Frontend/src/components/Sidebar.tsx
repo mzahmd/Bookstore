@@ -178,7 +178,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">{customer?.name}</Text>
+                  <Text fontSize="sm">{customer?.username}</Text>
                   <Text fontSize="xs" color="gray.600">
                     {customer?.roles}
                   </Text>
