@@ -14,7 +14,6 @@ import * as Yup from "yup";
 import { useAuth } from "../hooks/useAuth";
 import { errorNotification } from "./Notification";
 import { useNavigate } from "react-router-dom";
-import { ICredentials } from "../entities/credentials";
 
 interface Props {
   label: string;
@@ -65,7 +64,6 @@ function LoginForm() {
       onSubmit={(values, { setSubmitting }) => {
         // alert(JSON.stringify(values, null, 0));
         setSubmitting(true);
-        console.log(values as ICredentials);
 
         login(values)
           .then(() => {
