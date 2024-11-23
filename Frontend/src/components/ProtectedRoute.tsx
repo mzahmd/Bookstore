@@ -13,7 +13,6 @@ export default function ProtectedRoute({ children }: Props) {
   useEffect(() => {
     if (!isCustomerAuthenticated()) {
       navigate("/");
-      
     }
   }, [isCustomerAuthenticated, navigate]);
 
