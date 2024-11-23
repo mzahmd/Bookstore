@@ -8,7 +8,7 @@ interface IAuthContext {
   customer: ICustomer | null;
   login: (userNameAndPassword: ICredentials) => Promise<unknown>;
   logout: () => void;
-  isCustomerAuthenticated: () => boolean
+  isCustomerAuthenticated: () => boolean;
 }
 
 export const AuthContext = createContext<IAuthContext | null>(null);
@@ -20,6 +20,18 @@ interface Props {
 export default function AuthProvider({ children }: Props) {
   const [customer, setCustomer] = useState<ICustomer | null>(null);
 
+  useEffect(() => {
+    let token = localStorage.getItem("access_token");
+
+    if (token) {
+      token = jwtDecode(token);
+      setCustomer({
+        username: token && token.sub,
+        roles:token && token.scopes,
+      });
+    }
+  }, []);
+
   async function login(userNameAndPassword: ICredentials) {
     return new Promise((resolve, reject) => {
       performLogin(userNameAndPassword)
@@ -28,9 +40,15 @@ export default function AuthProvider({ children }: Props) {
           localStorage.setItem("access_token", jwtToken);
           console.log(jwtToken);
 
+          const decodedToken = jwtDecode(jwtToken);
+
           setCustomer({
-            ...res.data.customerDTO,
+            username: decodedToken && decodedToken.sub,
+            roles: decodedToken && decodedToken.scopes,
           });
+          // setCustomer({
+          //   ...res.data.customerDTO,
+          // });
           resolve(res);
         })
         .catch((err) => {
@@ -45,14 +63,13 @@ export default function AuthProvider({ children }: Props) {
   }
 
   function isCustomerAuthenticated() {
-    const token = localStorage.getItem("acces_token");
+    const token = localStorage.getItem("access_token");
 
     if (!token) {
       return false;
     }
 
-    const {exp: expiration} = jwtDecode(token);
-    console.log(expiration);
+    const { exp: expiration } = jwtDecode(token);
 
     if (expiration && Date.now() > expiration * 1000) {
       logout();
@@ -68,7 +85,7 @@ export default function AuthProvider({ children }: Props) {
         customer,
         login,
         logout,
-        isCustomerAuthenticated
+        isCustomerAuthenticated,
       }}
     >
       {children}
