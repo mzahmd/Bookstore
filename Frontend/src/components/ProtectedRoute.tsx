@@ -12,8 +12,7 @@ export default function ProtectedRoute({ children }: Props) {
 
   useEffect(() => {
     if (!isCustomerAuthenticated()) {
-      // TODO: etwas stimmt nicht mit navigate er navigiert nicht nach dem anmelden
-      // navigate("/");
+      navigate("/");
       
     }
   }, [isCustomerAuthenticated, navigate]);
