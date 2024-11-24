@@ -46,9 +46,6 @@ export default function AuthProvider({ children }: Props) {
             username: decodedToken && decodedToken.sub,
             roles: decodedToken && decodedToken.scopes,
           });
-          // setCustomer({
-          //   ...res.data.customerDTO,
-          // });
           resolve(res);
         })
         .catch((err) => {
