@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ChakraProvider, createStandaloneToast } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthProvider from "./components/AuthContext.tsx";
+import AuthProvider from "./context/AuthContext.tsx";
 import App from "./App.tsx";
 import Login from "./components/Login.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
