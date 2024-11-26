@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import { useAuth } from "../hooks/useAuth";
 import { errorNotification } from "./Notification";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 interface Props {
   label: string;
@@ -104,6 +105,15 @@ function LoginForm() {
 }
 
 export default function Login() {
+  const { customer } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (customer) {
+      navigate("/dashboard");
+    }
+  }, [customer, navigate]);
+
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
