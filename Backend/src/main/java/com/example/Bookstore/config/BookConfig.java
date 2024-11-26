@@ -29,7 +29,7 @@ public class BookConfig {
             Customer customer1 = new Customer(
                     "Max Mustermann",
                     "max.mustermann@gmail.com",
-                    passwordEncoder.encode(UUID.randomUUID().toString()),
+                    passwordEncoder.encode("password"),
                     18,
                     Gender.MALE
             );
