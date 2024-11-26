@@ -39,13 +39,12 @@ const MyTextInput = ({ label, ...props }: MyTextInputProps) => {
   );
 };
 
-const UpdateBookForm = ({
-  fetchBooks,
-  oldIsbn,
-}: {
+interface UpdateBookFormProps {
   fetchBooks: () => void;
   oldIsbn: string;
-}) => {
+}
+
+const UpdateBookForm = ({ fetchBooks, oldIsbn }: UpdateBookFormProps) => {
   return (
     <>
       <Formik
