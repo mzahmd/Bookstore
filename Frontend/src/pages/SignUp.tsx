@@ -14,7 +14,10 @@ import { Form, Formik, useField } from "formik";
 import * as Yup from "yup";
 import { saveCustomer } from "../services/client";
 import { ICustomer } from "../entities/customer";
-import { errorNotification, successNotification } from "../components/Notification";
+import {
+  errorNotification,
+  successNotification,
+} from "../components/Notification";
 // import { useAuth } from "../hooks/useAuth";
 // import { errorNotification } from "../components/Notification";
 // import { useNavigate } from "react-router-dom";
@@ -45,10 +48,6 @@ const MyTextInput = ({ label, ...props }: Props) => {
     </Box>
   );
 };
-
-// TODO: Form muss angepasst werden
-// TODO: Backend wurde noch nichts gemacht
-// TODO: 
 
 function SignUpForm() {
   return (
@@ -81,18 +80,14 @@ function SignUpForm() {
               "customer saved",
               `${newCustomer.name} is successfully saved`
             );
-            // fetchBooks();
           })
-        .catch((err) => {
-          console.log(err);
-          errorNotification(err.code, `${err.response.data.msg}`);
-        })
-        .finally(() => {
-          setSubmitting(false);
-        });
-        
-
-        // saveCustomer(newCustomer)
+          .catch((err) => {
+            console.log(err);
+            errorNotification(err.code, `${err.response.data.msg}`);
+          })
+          .finally(() => {
+            setSubmitting(false);
+          });
       }}
     >
       {({ isValid, isSubmitting }) => (
