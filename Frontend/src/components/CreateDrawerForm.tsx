@@ -15,11 +15,11 @@ import CreateBookForm from "./CreateBookForm";
 const AddIcon = () => "+";
 const CloseIcon = () => "X";
 
-export default function CreateDrawerForm({
-  fetchBooks,
-}: {
+interface Props {
   fetchBooks: () => void;
-}) {
+}
+
+export default function CreateDrawerForm({ fetchBooks }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -32,11 +32,9 @@ export default function CreateDrawerForm({
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Add a new Book</DrawerHeader>
-
           <DrawerBody>
             <CreateBookForm fetchBooks={fetchBooks} />
           </DrawerBody>
-
           <DrawerFooter>
             <Button
               leftIcon={<CloseIcon />}

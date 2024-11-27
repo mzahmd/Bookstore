@@ -90,21 +90,18 @@ const UpdateBookForm = ({ fetchBooks, oldIsbn }: UpdateBookFormProps) => {
                 type="text"
                 placeholder="Harry Potter"
               />
-
               <MyTextInput
                 label="book author"
                 name="author"
                 type="text"
                 placeholder="J.K. Rowling"
               />
-
               <MyTextInput
                 label="ISBN"
                 name="isbn"
                 type="text"
                 placeholder="123-456-789"
               />
-
               <Button disabled={!isValid || isSubmitting} type="submit">
                 Submit
               </Button>

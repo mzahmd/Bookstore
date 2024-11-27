@@ -13,13 +13,11 @@ import UpdateBookForm from "./UpdateBookForm";
 
 const CloseIcon = () => "X";
 
-export default function UpdateDrawerForm({
-  fetchBooks,
-  oldIsbn,
-}: {
+interface Props {
   fetchBooks: () => void;
   oldIsbn: string;
-}) {
+}
+export default function UpdateDrawerForm({ fetchBooks, oldIsbn }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
