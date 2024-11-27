@@ -3,7 +3,8 @@ export interface ICustomer {
   name?: string;
   email?: string;
   gender?: string;
-  age?: string;
+  age?: number;
+  password?: string;
   roles?: string;
   username?: string;
 }

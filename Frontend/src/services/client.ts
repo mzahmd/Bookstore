@@ -1,6 +1,7 @@
 import axios from "axios";
 import { IBook } from "../entities/book";
 import { ICredentials } from "../entities/credentials";
+import { ICustomer } from "../entities/customer";
 
 const getAuthConfig = () => ({
   headers: {
@@ -42,6 +43,18 @@ export const performLogin = async (userNameAndPassword: ICredentials) => {
   return await axios.post(
     `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/login`,
     JSON.stringify(userNameAndPassword),
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+export const saveCustomer = async (customer: ICustomer) => {
+  return await axios.post(
+    `${import.meta.env.VITE_API_BASE_URL}/api/v1/customer`,
+    JSON.stringify(customer),
     {
       headers: {
         "Content-Type": "application/json",
