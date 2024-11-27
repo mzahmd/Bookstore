@@ -13,7 +13,7 @@ import {
 import { Form, Formik, useField } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../hooks/useAuth";
-import { errorNotification } from "./Notification";
+import { errorNotification } from "../components/Notification";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 

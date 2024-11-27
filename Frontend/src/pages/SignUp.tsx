@@ -18,9 +18,6 @@ import {
   errorNotification,
   successNotification,
 } from "../components/Notification";
-// import { useAuth } from "../hooks/useAuth";
-// import { errorNotification } from "../components/Notification";
-// import { useNavigate } from "react-router-dom";
 
 interface Props {
   label: string;

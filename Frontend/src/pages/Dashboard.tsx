@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Wrap, WrapItem } from "@chakra-ui/react";
 
-import Card from "./components/Card";
-import CreateDrawerForm from "./components/CreateDrawerForm";
-import { errorNotification } from "./components/Notification";
-import Sidebar from "./components/Sidebar";
-import { getBook } from "./services/client";
-import { IBook } from "./entities/book";
+import Card from "../components/Card";
+import CreateDrawerForm from "../components/CreateDrawerForm";
+import { errorNotification } from "../components/Notification";
+import Sidebar from "../components/Sidebar";
+import { getBook } from "../services/client";
+import { IBook } from "../entities/book";
 
-export default function App() {
+export default function Dashboard() {
   const [books, setBooks] = useState<IBook[]>([]);
 
   const fetchBooks = () =>
