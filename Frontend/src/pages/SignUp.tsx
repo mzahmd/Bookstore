@@ -12,12 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { Form, Formik, useField } from "formik";
 import * as Yup from "yup";
-import { saveCustomer } from "../services/client";
-import { ICustomer } from "../entities/customer";
 import {
   errorNotification,
   successNotification,
 } from "../components/Notification";
+import { ICustomer } from "../entities/customer";
+import { saveCustomer } from "../services/customerClient";
 
 interface Props {
   label: string;

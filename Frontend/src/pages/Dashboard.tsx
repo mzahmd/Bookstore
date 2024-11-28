@@ -5,8 +5,8 @@ import Card from "../components/Card";
 import CreateDrawerForm from "../components/CreateDrawerForm";
 import { errorNotification } from "../components/Notification";
 import Sidebar from "../components/Sidebar";
-import { getBook } from "../services/client";
 import { IBook } from "../entities/book";
+import { getBook } from "../services/bookClient";
 
 export default function Dashboard() {
   const [books, setBooks] = useState<IBook[]>([]);

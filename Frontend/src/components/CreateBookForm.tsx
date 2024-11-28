@@ -9,8 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
-import { saveBook } from "../services/client";
 import { errorNotification, successNotification } from "./Notification";
+import { saveBook } from "../services/bookClient";
 
 interface MyTextInputProps {
   label: string;

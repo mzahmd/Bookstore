@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
-import { performLogin } from "../services/client";
 import { ICredentials } from "../entities/credentials";
 import { ICustomer } from "../entities/customer";
 import { jwtDecode } from "jwt-decode";
+import { performLogin } from "../services/authClient";
 
 interface IAuthContext {
   customer: ICustomer | null;
