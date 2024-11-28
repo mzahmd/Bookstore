@@ -1,9 +1,10 @@
 import axios from "axios";
 import { IBook } from "../entities/book";
+import { ACCESS_TOKEN } from "../data/constant";
 
 const getAuthConfig = () => ({
   headers: {
-    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+    Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
   },
 });
 

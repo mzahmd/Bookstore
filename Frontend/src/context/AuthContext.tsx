@@ -3,6 +3,7 @@ import { ICredentials } from "../entities/credentials";
 import { ICustomer } from "../entities/customer";
 import { jwtDecode } from "jwt-decode";
 import { performLogin } from "../services/authClient";
+import { ACCESS_TOKEN } from "../data/constant";
 
 interface IAuthContext {
   customer: ICustomer | null;
@@ -21,7 +22,7 @@ export default function AuthProvider({ children }: Props) {
   const [customer, setCustomer] = useState<ICustomer | null>(null);
 
   useEffect(() => {
-    let token = localStorage.getItem("access_token");
+    let token = localStorage.getItem(ACCESS_TOKEN);
 
     if (token) {
       token = jwtDecode(token);
@@ -37,7 +38,7 @@ export default function AuthProvider({ children }: Props) {
       performLogin(userNameAndPassword)
         .then((res) => {
           const jwtToken = res.headers["authorization"];
-          localStorage.setItem("access_token", jwtToken);
+          localStorage.setItem(ACCESS_TOKEN, jwtToken);
           console.log(jwtToken);
 
           const decodedToken = jwtDecode(jwtToken);
@@ -55,12 +56,12 @@ export default function AuthProvider({ children }: Props) {
   }
 
   function logout() {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem(ACCESS_TOKEN);
     setCustomer(null);
   }
 
   function isCustomerAuthenticated() {
-    const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem(ACCESS_TOKEN);
 
     if (!token) {
       return false;
