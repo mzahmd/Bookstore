@@ -3,7 +3,7 @@ import { ICredentials } from "../entities/credentials";
 import { ICustomer } from "../entities/customer";
 import { jwtDecode } from "jwt-decode";
 import { performLogin } from "../services/authClient";
-import { ACCESS_TOKEN } from "../data/constant";
+import { ACCESS_TOKEN, AUTHORIZATION } from "../data/constant";
 
 interface IAuthContext {
   customer: ICustomer | null;
@@ -37,7 +37,7 @@ export default function AuthProvider({ children }: Props) {
     return new Promise((resolve, reject) => {
       performLogin(userNameAndPassword)
         .then((res) => {
-          const jwtToken = res.headers["authorization"];
+          const jwtToken = res.headers[AUTHORIZATION];
           localStorage.setItem(ACCESS_TOKEN, jwtToken);
           console.log(jwtToken);
 
