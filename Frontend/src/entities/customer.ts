@@ -5,6 +5,9 @@ export interface ICustomer {
   gender?: string;
   age?: number;
   password?: string;
-  roles?: string;
-  username?: string;
+}
+
+export interface ICustomerToken {
+  roles: string;
+  username: string;
 }
