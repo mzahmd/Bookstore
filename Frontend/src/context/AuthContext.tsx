@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
 import { ICredentials } from "../entities/credentials";
-import { ICustomer } from "../entities/customer";
+import { ICustomerToken } from "../entities/customer";
 import { jwtDecode } from "jwt-decode";
 import { performLogin } from "../services/authClient";
 import { ACCESS_TOKEN, AUTHORIZATION } from "../data/constant";
 
 interface IAuthContext {
-  customer: ICustomer | null;
+  customer: ICustomerToken | null;
   login: (userNameAndPassword: ICredentials) => Promise<unknown>;
   logout: () => void;
   isCustomerAuthenticated: () => boolean;
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function AuthProvider({ children }: Props) {
-  const [customer, setCustomer] = useState<ICustomer | null>(null);
+  const [customer, setCustomer] = useState<ICustomerToken | null>(null);
 
   useEffect(() => {
     let token = localStorage.getItem(ACCESS_TOKEN);

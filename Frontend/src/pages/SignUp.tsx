@@ -16,7 +16,6 @@ import {
   errorNotification,
   successNotification,
 } from "../components/Notification";
-import { ICustomer } from "../entities/customer";
 import { saveCustomer } from "../services/customerClient";
 
 interface Props {
@@ -71,7 +70,7 @@ function SignUpForm() {
       })}
       onSubmit={(newCustomer, { setSubmitting }) => {
         setSubmitting(true);
-        saveCustomer(newCustomer as ICustomer)
+        saveCustomer(newCustomer)
           .then(() => {
             successNotification(
               "customer saved",
