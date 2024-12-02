@@ -52,6 +52,10 @@ interface SidebarProps extends BoxProps {
   onClose: () => void;
 }
 
+interface SidebarWithHeader {
+  children: React.ReactNode;
+}
+
 const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome },
   { name: "Trending", icon: FiTrendingUp },
@@ -206,7 +210,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   );
 };
 
-const SidebarWithHeader = ({ children }: { children: React.ReactNode }) => {
+const SidebarWithHeader = ({ children }: SidebarWithHeader) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
