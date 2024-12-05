@@ -34,29 +34,12 @@ import { IconType } from "react-icons";
 import reactSVG from "../assets/react.svg";
 import { useAuth } from "../hooks/useAuth";
 
-interface LinkItemProps {
+interface LinkItem {
   name: string;
   icon: IconType;
 }
 
-interface NavItemProps extends FlexProps {
-  icon: IconType;
-  children: React.ReactNode;
-}
-
-interface MobileProps extends FlexProps {
-  onOpen: () => void;
-}
-
-interface SidebarProps extends BoxProps {
-  onClose: () => void;
-}
-
-interface SidebarWithHeader {
-  children: React.ReactNode;
-}
-
-const LinkItems: Array<LinkItemProps> = [
+const LinkItems: Array<LinkItem> = [
   { name: "Home", icon: FiHome },
   { name: "Trending", icon: FiTrendingUp },
   { name: "Explore", icon: FiCompass },
@@ -64,7 +47,11 @@ const LinkItems: Array<LinkItemProps> = [
   { name: "Settings", icon: FiSettings },
 ];
 
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+interface SidebarContentProps extends BoxProps {
+  onClose: () => void;
+}
+
+const SidebarContent = ({ onClose, ...rest }: SidebarContentProps) => {
   return (
     <Box
       transition="3s ease"
@@ -90,6 +77,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     </Box>
   );
 };
+
+interface NavItemProps extends FlexProps {
+  icon: IconType;
+  children: React.ReactNode;
+}
 
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   return (
@@ -128,7 +120,11 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   );
 };
 
-const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+interface MobileNavProps extends FlexProps {
+  onOpen: () => void;
+}
+
+const MobileNav = ({ onOpen, ...rest }: MobileNavProps) => {
   const { logout, customer } = useAuth();
 
   return (
@@ -150,7 +146,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-
       <Text
         display={{ base: "flex", md: "none" }}
         fontSize="2xl"
@@ -209,6 +204,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
     </Flex>
   );
 };
+
+interface SidebarWithHeader {
+  children: React.ReactNode;
+}
 
 const SidebarWithHeader = ({ children }: SidebarWithHeader) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
