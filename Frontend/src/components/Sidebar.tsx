@@ -51,7 +51,7 @@ interface SidebarContentProps extends BoxProps {
   onClose: () => void;
 }
 
-const SidebarContent = ({ onClose, ...rest }: SidebarContentProps) => {
+function SidebarContent({ onClose, ...rest }: SidebarContentProps) {
   return (
     <Box
       transition="3s ease"
@@ -76,14 +76,14 @@ const SidebarContent = ({ onClose, ...rest }: SidebarContentProps) => {
       ))}
     </Box>
   );
-};
+}
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: React.ReactNode;
 }
 
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+function NavItem({ icon, children, ...rest }: NavItemProps) {
   return (
     <Box
       as="a"
@@ -118,13 +118,13 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
       </Flex>
     </Box>
   );
-};
+}
 
 interface MobileNavProps extends FlexProps {
   onOpen: () => void;
 }
 
-const MobileNav = ({ onOpen, ...rest }: MobileNavProps) => {
+function MobileNav({ onOpen, ...rest }: MobileNavProps) {
   const { logout, customer } = useAuth();
 
   return (
@@ -203,13 +203,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileNavProps) => {
       </HStack>
     </Flex>
   );
-};
+}
 
 interface SidebarWithHeader {
   children: React.ReactNode;
 }
 
-const SidebarWithHeader = ({ children }: SidebarWithHeader) => {
+export default function SidebarWithHeader({ children }: SidebarWithHeader) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -238,6 +238,4 @@ const SidebarWithHeader = ({ children }: SidebarWithHeader) => {
       </Box>
     </Box>
   );
-};
-
-export default SidebarWithHeader;
+}
