@@ -6,13 +6,13 @@ import CreateDrawerForm from "../components/CreateDrawerForm";
 import { errorNotification } from "../components/Notification";
 import Sidebar from "../components/Sidebar";
 import { IBook } from "../entities/book";
-import { getBook } from "../services/bookClient";
+import { getBooks } from "../services/bookClient";
 
 export default function Dashboard() {
   const [books, setBooks] = useState<IBook[]>([]);
 
   const fetchBooks = () =>
-    getBook()
+    getBooks()
       .then((r) => setBooks(r?.data))
       .catch((err) => errorNotification(err.code, `${err.response.data.msg}`));
 

@@ -8,7 +8,7 @@ const getAuthConfig = () => ({
   },
 });
 
-export const getBook = async () => {
+export const getBooks = async () => {
   return await axios.get(
     `${import.meta.env.VITE_API_BASE_URL}/api/v1/book`,
     getAuthConfig()
