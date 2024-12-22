@@ -93,7 +93,12 @@ export default function Card({ title, isbn, author, fetchBooks }: Props) {
           </Stack>
           <Stack direction={"row"}>
             <Box>
-              <UpdateDrawerForm fetchBooks={fetchBooks} isbn={isbn} />
+              <UpdateDrawerForm
+                fetchBooks={fetchBooks}
+                title={title}
+                author={author}
+                isbn={isbn}
+              />
             </Box>
             <Box>
               <Button colorScheme="red" onClick={onOpen}>

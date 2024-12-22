@@ -15,10 +15,12 @@ const CloseIcon = () => "X";
 
 interface Props {
   fetchBooks: () => void;
+  title: string;
+  author: string;
   isbn: string;
 }
 
-export default function UpdateDrawerForm({ fetchBooks, isbn }: Props) {
+export default function UpdateDrawerForm({ fetchBooks, title, author, isbn }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -30,7 +32,7 @@ export default function UpdateDrawerForm({ fetchBooks, isbn }: Props) {
           <DrawerCloseButton />
           <DrawerHeader>Update a new Book</DrawerHeader>
           <DrawerBody>
-            <UpdateBookForm fetchBooks={fetchBooks} isbn={isbn} />
+            <UpdateBookForm fetchBooks={fetchBooks} title={title} author={author} isbn={isbn} />
           </DrawerBody>
           <DrawerFooter>
             <Button
