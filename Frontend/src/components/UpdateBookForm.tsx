@@ -41,17 +41,17 @@ const MyTextInput = ({ label, ...props }: MyTextInputProps) => {
 
 interface UpdateBookFormProps {
   fetchBooks: () => void;
-  oldIsbn: string;
+  isbn: string;
 }
 
-const UpdateBookForm = ({ fetchBooks, oldIsbn }: UpdateBookFormProps) => {
+const UpdateBookForm = ({ fetchBooks, isbn }: UpdateBookFormProps) => {
   return (
     <>
       <Formik
         initialValues={{
-          title: "",
-          author: "",
-          isbn: "",
+          title: "title",
+          author: "author",
+          isbn: "isbn",
         }}
         validationSchema={Yup.object({
           title: Yup.string()
@@ -64,7 +64,7 @@ const UpdateBookForm = ({ fetchBooks, oldIsbn }: UpdateBookFormProps) => {
         })}
         onSubmit={(newBook, { setSubmitting }) => {
           setSubmitting(true);
-          updateBook(oldIsbn, { ...newBook })
+          updateBook(isbn, { ...newBook })
             .then(() => {
               successNotification(
                 "book saved",
