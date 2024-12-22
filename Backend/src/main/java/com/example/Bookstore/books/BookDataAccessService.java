@@ -20,6 +20,12 @@ public class BookDataAccessService implements BookDao {
     }
 
     @Override
+    public Book getBookByISBN(String isbn) {
+        return bookRepository.findByIsbn(isbn)
+                .orElseThrow(() -> new ResourceNotFoundException("Book with given ISBN not found"));
+    }
+
+    @Override
     public void addBook(Book newBook) {
         boolean bookExists = bookRepository.findByIsbn(newBook.getIsbn()).isPresent();
 

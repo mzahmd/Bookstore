@@ -26,6 +26,11 @@ public class BookController {
         return bookService.getBooks();
     }
 
+    @GetMapping("{isbn}")
+    BookDTO getBook(@PathVariable String isbn) {
+        return bookService.getBook(isbn);
+    }
+
     @PostMapping
     public void addBook(@RequestBody Book book) {
         bookService.addBook(book);

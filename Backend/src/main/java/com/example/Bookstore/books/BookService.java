@@ -21,6 +21,10 @@ public class BookService {
                 .toList();
     }
 
+    BookDTO getBook(String isbn) {
+        return bookDTOMapper.apply(bookDao.getBookByISBN(isbn));
+    }
+
     void addBook(Book newBook) {
         bookDao.addBook(newBook);
     }
