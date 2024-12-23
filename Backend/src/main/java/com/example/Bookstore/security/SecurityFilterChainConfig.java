@@ -42,10 +42,6 @@ public class SecurityFilterChainConfig {
                                                 "/api/v1/auth/login"
                                         )
                                         .permitAll()
-//                                        .requestMatchers(
-//                                                HttpMethod.GET,
-//                                                "/api/v1/book"
-//                                        ).permitAll()
                                         .anyRequest()
                                         .authenticated();
                             } catch (Exception e) {
