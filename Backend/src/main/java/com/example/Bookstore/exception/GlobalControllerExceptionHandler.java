@@ -12,7 +12,6 @@ public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler(DuplicateResourceException.class)
     public ResponseEntity<ApiError> DuplicateResource(DuplicateResourceException e) {
-
         ApiError error = new ApiError(e.getMessage(), HttpStatus.FORBIDDEN.value());
 
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
@@ -20,7 +19,6 @@ public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiError> ResourceNotFound(ResourceNotFoundException e) {
-
         ApiError error = new ApiError(e.getMessage(), HttpStatus.NOT_FOUND.value());
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
@@ -28,7 +26,6 @@ public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler(InsufficientAuthenticationException.class)
     public ResponseEntity<ApiError> defaultException(InsufficientAuthenticationException e) {
-
         ApiError error = new ApiError(e.getMessage(), HttpStatus.FORBIDDEN.value());
 
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
@@ -36,7 +33,6 @@ public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiError> defaultException(BadCredentialsException e) {
-
         ApiError error = new ApiError(e.getMessage(), HttpStatus.UNAUTHORIZED.value());
 
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
@@ -44,7 +40,6 @@ public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> defaultException(Exception e) {
-
         ApiError error = new ApiError(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
 
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
