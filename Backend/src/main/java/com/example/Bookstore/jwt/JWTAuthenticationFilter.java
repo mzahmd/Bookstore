@@ -30,8 +30,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response,
-            @NonNull FilterChain filterChain)
-            throws ServletException, IOException {
+            @NonNull FilterChain filterChain
+    ) throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
 
@@ -43,9 +43,12 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         String jwt = authHeader.substring(7);
         String subject = jwtUtil.getSubject(jwt);
 
-        if (subject != null
-                // contains the Information who's currently auhthenticated
-                && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (
+                subject != null
+                // contains the Information who's currently authenticated
+                && SecurityContextHolder.getContext().getAuthentication() == null
+        ) {
+
             UserDetails userDetails = userDetailsService.loadUserByUsername(subject);
 
             if (jwtUtil.isTokenValid(jwt, userDetails.getUsername())) {
