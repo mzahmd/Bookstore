@@ -23,6 +23,7 @@ public class BookIT {
     private static final String BOOK_PATH = "/api/v1/book";
     private static final String CUSTOMER_PATH = "/api/v1/customer";
 
+    // TODO: Test not working
     @Test
     void canGetBooks() {
         Random random = new Random();
