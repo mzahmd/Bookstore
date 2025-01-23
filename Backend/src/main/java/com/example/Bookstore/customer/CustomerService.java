@@ -29,13 +29,13 @@ public class CustomerService {
         return customerDTOMapper.apply(customerDao.getCustomerById(id));
     }
 
-    public void addCustomer(Customer customer) {
+    public void addCustomer(CustomerRegistrationRequest customer) {
         Customer newCustomer = new Customer(
-                customer.getName(),
-                customer.getEmail(),
-                passwordEncoder.encode(customer.getPassword()),
-                customer.getAge(),
-                customer.getGender()
+                customer.name(),
+                customer.email(),
+                passwordEncoder.encode(customer.password()),
+                customer.age(),
+                customer.gender()
         );
         customerDao.addCustomer(newCustomer);
     }
