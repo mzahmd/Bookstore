@@ -14,8 +14,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.Random;
 
-// TODO: more tests
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BookIT {
 
