@@ -59,7 +59,7 @@ public class BookIT {
     }
 
     @Test
-    void canDAddBooks() {
+    void canAddBooks() {
         Random random = new Random();
         Faker faker = new Faker();
 
