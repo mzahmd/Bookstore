@@ -16,6 +16,7 @@ import reactor.core.publisher.Mono;
 import java.util.Random;
 
 // TODO: add test addBookByIsbn
+// TODO: before each test delete book in repo
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
