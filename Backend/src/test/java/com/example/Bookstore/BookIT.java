@@ -178,7 +178,7 @@ public class BookIT {
                 .expectStatus()
                 .isOk();
 
-        // update book
+        // delete book
         webTestClient.delete()
                 .uri(BOOK_PATH + "/126")
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
