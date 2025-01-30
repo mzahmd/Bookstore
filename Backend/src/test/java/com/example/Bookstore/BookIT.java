@@ -94,4 +94,51 @@ public class BookIT {
                 .expectStatus()
                 .isOk();
     }
+
+    @Test
+    void canUpdateBooks() {
+        Random random = new Random();
+        Faker faker = new Faker();
+
+        String fullName = faker.name().fullName();
+        String email = faker.name().firstName() + "." + faker.name().lastName() + "@gmail.com";
+        int age = random.nextInt(1, 100);
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+
+        Customer register = new Customer(fullName, email, "password", age, gender);
+
+        String jwtToken = webTestClient.post()
+                .uri(CUSTOMER_PATH)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(register), Customer.class)
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .returnResult(Void.class)
+                .getResponseHeaders()
+                .get(HttpHeaders.AUTHORIZATION)
+                .get(0);
+
+        Book newBook = new Book("124", "My title", "The Author");
+        Book updateBook = new Book("125", "New Title", "New Author");
+
+        // add a book
+        webTestClient.post()
+                .uri(BOOK_PATH)
+                .bodyValue(newBook)
+                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
+                .exchange()
+                .expectStatus()
+                .isOk();
+
+        // update book
+        webTestClient.put()
+                .uri(BOOK_PATH + "/123")
+                .bodyValue(updateBook)
+                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
+                .exchange()
+                .expectStatus()
+                .isOk();
+    }
 }
