@@ -134,7 +134,7 @@ public class BookIT {
 
         // update book
         webTestClient.put()
-                .uri(BOOK_PATH + "/123")
+                .uri(BOOK_PATH + "/124")
                 .bodyValue(updateBook)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
