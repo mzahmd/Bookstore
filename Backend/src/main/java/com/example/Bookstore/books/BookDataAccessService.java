@@ -3,10 +3,11 @@ package com.example.Bookstore.books;
 import com.example.Bookstore.exception.DuplicateResourceException;
 import com.example.Bookstore.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Repository
+@Service
 public class BookDataAccessService implements BookDao {
     BookRepository bookRepository;
 
