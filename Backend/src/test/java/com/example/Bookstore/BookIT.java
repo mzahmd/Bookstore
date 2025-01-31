@@ -59,6 +59,51 @@ public class BookIT {
     }
 
     @Test
+    void canGetBooksByIsbn() {
+        Random random = new Random();
+        Faker faker = new Faker();
+
+        String fullName = faker.name().fullName();
+        String email = faker.name().firstName() + "." + faker.name().lastName() + "@gmail.com";
+        int age = random.nextInt(1, 100);
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+
+        Customer register = new Customer(fullName, email, "password", age, gender);
+
+        String jwtToken = webTestClient.post()
+                .uri(CUSTOMER_PATH)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(register), Customer.class)
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .returnResult(Void.class)
+                .getResponseHeaders()
+                .get(HttpHeaders.AUTHORIZATION)
+                .get(0);
+
+        Book newBook = new Book("200", "My title", "The Author");
+
+        // add a book
+        webTestClient.post()
+                .uri(BOOK_PATH)
+                .bodyValue(newBook)
+                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
+                .exchange()
+                .expectStatus()
+                .isOk();
+
+        // get book by Isbn
+        webTestClient.get()
+                .uri(BOOK_PATH + "/200")
+                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
+                .exchange()
+                .expectStatus()
+                .isOk();
+    }
+
+    @Test
     void canAddBooks() {
         Random random = new Random();
         Faker faker = new Faker();
