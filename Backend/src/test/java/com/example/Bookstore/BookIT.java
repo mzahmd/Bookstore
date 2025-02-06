@@ -107,7 +107,7 @@ public class BookIT {
 
         // get book by Isbn
         webTestClient.get()
-                .uri(BOOK_PATH + "/111")
+                .uri(BOOK_PATH + "/" + newBook.getIsbn())
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
                 .expectStatus()
@@ -190,7 +190,7 @@ public class BookIT {
 
         // update book
         webTestClient.put()
-                .uri(BOOK_PATH + "/2000")
+                .uri(BOOK_PATH + "/" + newBook.getIsbn())
                 .bodyValue(updateBook)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
@@ -236,7 +236,7 @@ public class BookIT {
 
         // delete book
         webTestClient.delete()
-                .uri(BOOK_PATH + "/12")
+                .uri(BOOK_PATH + "/" + newBook.getIsbn())
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
                 .expectStatus()
