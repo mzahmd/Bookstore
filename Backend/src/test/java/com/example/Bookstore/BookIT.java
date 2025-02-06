@@ -1,9 +1,11 @@
 package com.example.Bookstore;
 
 import com.example.Bookstore.books.Book;
+import com.example.Bookstore.books.BookRepository;
 import com.example.Bookstore.customer.Customer;
 import com.example.Bookstore.customer.Gender;
 import com.github.javafaker.Faker;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,8 +22,18 @@ public class BookIT {
     @Autowired
     private WebTestClient webTestClient;
 
+    @Autowired
+    private BookRepository bookRepository;
+
     private static final String BOOK_PATH = "/api/v1/book";
     private static final String CUSTOMER_PATH = "/api/v1/customer";
+
+
+    @BeforeEach
+    void setUp() {
+        bookRepository.deleteAll();
+    }
+
 
     @Test
     void canGetBooks() {
@@ -82,7 +94,7 @@ public class BookIT {
                 .get(HttpHeaders.AUTHORIZATION)
                 .get(0);
 
-        Book newBook = new Book("200", "My title", "The Author");
+        Book newBook = new Book("111", "My title", "The Author");
 
         // add a book
         webTestClient.post()
@@ -95,7 +107,7 @@ public class BookIT {
 
         // get book by Isbn
         webTestClient.get()
-                .uri(BOOK_PATH + "/200")
+                .uri(BOOK_PATH + "/111")
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
                 .expectStatus()
@@ -127,7 +139,7 @@ public class BookIT {
                 .get(HttpHeaders.AUTHORIZATION)
                 .get(0);
 
-        Book newBook = new Book("123", "My title", "The Author");
+        Book newBook = new Book("200", "My title", "The Author");
 
         // add a book
         webTestClient.post()
@@ -164,7 +176,7 @@ public class BookIT {
                 .get(HttpHeaders.AUTHORIZATION)
                 .get(0);
 
-        Book newBook = new Book("124", "My title", "The Author");
+        Book newBook = new Book("2000", "My title", "The Author");
         Book updateBook = new Book("125", "New Title", "New Author");
 
         // add a book
@@ -178,7 +190,7 @@ public class BookIT {
 
         // update book
         webTestClient.put()
-                .uri(BOOK_PATH + "/124")
+                .uri(BOOK_PATH + "/2000")
                 .bodyValue(updateBook)
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
@@ -211,7 +223,7 @@ public class BookIT {
                 .get(HttpHeaders.AUTHORIZATION)
                 .get(0);
 
-        Book newBook = new Book("126", "My title", "The Author");
+        Book newBook = new Book("12", "My title", "The Author");
 
         // add a book
         webTestClient.post()
@@ -224,7 +236,7 @@ public class BookIT {
 
         // delete book
         webTestClient.delete()
-                .uri(BOOK_PATH + "/126")
+                .uri(BOOK_PATH + "/12")
                 .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
                 .expectStatus()
