@@ -20,7 +20,7 @@ public class BookDataAccessService implements BookDao {
     }
 
     @Override
-    public Book getBookByISBN(String isbn) {
+    public Book getBookByIsbn(String isbn) {
         return bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> new ResourceNotFoundException("Book with given ISBN not found"));
     }
@@ -37,8 +37,8 @@ public class BookDataAccessService implements BookDao {
     }
 
     @Override
-    public void updateBook(String isbn, Book updateBook) {
-        boolean bookExists = bookRepository.findByIsbn(updateBook.getIsbn()).isPresent();
+    public void updateBook(String isbn, Book updatedBook) {
+        boolean bookExists = bookRepository.findByIsbn(updatedBook.getIsbn()).isPresent();
 
         if (bookExists) {
             throw new DuplicateResourceException("ISBN already exists");
@@ -47,9 +47,9 @@ public class BookDataAccessService implements BookDao {
         Book oldBook = bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> new ResourceNotFoundException("Given ISBN is not Valid"));
 
-        oldBook.setIsbn(updateBook.getIsbn());
-        oldBook.setTitle(updateBook.getTitle());
-        oldBook.setAuthor(updateBook.getAuthor());
+        oldBook.setIsbn(updatedBook.getIsbn());
+        oldBook.setTitle(updatedBook.getTitle());
+        oldBook.setAuthor(updatedBook.getAuthor());
 
         bookRepository.save(oldBook);
     }

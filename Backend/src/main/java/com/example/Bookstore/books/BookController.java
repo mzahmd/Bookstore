@@ -27,8 +27,8 @@ public class BookController {
     }
 
     @GetMapping("{isbn}")
-    BookDTO getBook(@PathVariable String isbn) {
-        return bookService.getBook(isbn);
+    BookDTO getBookByIsbn(@PathVariable String isbn) {
+        return bookService.getBookByIsbn(isbn);
     }
 
     @PostMapping
