@@ -25,8 +25,8 @@ public class BookConfig {
             bookRepository.save(book3);
 
             Customer customer1 = new Customer(
-                    "Max Mustermann",
-                    "max.mustermann@gmail.com",
+                    "Max Muster",
+                    "max.muster@gmail.com",
                     passwordEncoder.encode("password"),
                     18,
                     Gender.MALE
@@ -34,7 +34,7 @@ public class BookConfig {
             Customer customer2 = new Customer(
                     "Anna Max",
                     "anna.max@gmail.com",
-                    "password",
+                    passwordEncoder.encode("password"),
                     33,
                     Gender.FEMALE
             );
