@@ -34,7 +34,6 @@ public class BookIT {
         bookRepository.deleteAll();
     }
 
-
     @Test
     void canGetBooks() {
         Random random = new Random();
