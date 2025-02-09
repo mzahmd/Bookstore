@@ -1,3 +1,3 @@
 # Bookstore
 
-currently learning Spring Boot
+learning Spring Boot
