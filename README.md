@@ -1,3 +1,3 @@
 # Bookstore
 
-learning Spring Boot
+learning Spring Boot.
