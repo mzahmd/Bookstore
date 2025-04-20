@@ -8,6 +8,6 @@ This project serves as a learning resource for developing web applications with 
 
 ## 💻 Technologies
 
-- **Backend**: Spring Boot, Spring Security, JPA, PostgreSQL
+- **Backend**: Spring Boot, Spring Security, JWT, JPA, PostgreSQL
 - **Frontend**: React, TypeScript, Chakra UI, Vite
 - **Database**: PostgreSQL
