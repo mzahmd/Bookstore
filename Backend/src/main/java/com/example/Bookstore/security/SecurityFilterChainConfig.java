@@ -34,20 +34,14 @@ public class SecurityFilterChainConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auths ->
-                        {
-                            try {
-                                auths.requestMatchers(
-                                                HttpMethod.POST,
-                                                "/api/v1/customer",
-                                                "/api/v1/auth/login"
-                                        )
-                                        .permitAll()
-                                        .anyRequest()
-                                        .authenticated();
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
+                        auths.requestMatchers(
+                                        HttpMethod.POST,
+                                        "/api/v1/customer",
+                                        "/api/v1/auth/login"
+                                )
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated()
                 ).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
